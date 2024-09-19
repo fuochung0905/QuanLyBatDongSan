@@ -1,6 +1,6 @@
-/**/bin
-/**/obj
-/.vs
-/.vscode
-/.idea
-/**.sln.DotSettings.user
+/**/bin/
+/**/obj/
+/**/.vs/
+/**/.vscode/
+/**/.idea/
+/**.sln.DotSettings.user/
