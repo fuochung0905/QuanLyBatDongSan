@@ -1,0 +1,173 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{05C34958-2A49-4A66-87A2-E6E07F2F9E93}|Service\\Service.csproj|c:\\users\\fhung\\source\\repos\\base-net-core\\doan_project1\\service\\taikhoan\\taikhoanservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05C34958-2A49-4A66-87A2-E6E07F2F9E93}|Service\\Service.csproj|solutionrelative:service\\taikhoan\\taikhoanservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{879669F5-CAC0-4720-9591-544A85277324}|BE\\BE.csproj|c:\\users\\fhung\\source\\repos\\base-net-core\\doan_project1\\be\\controllers\\taikhoan\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{879669F5-CAC0-4720-9591-544A85277324}|BE\\BE.csproj|solutionrelative:be\\controllers\\taikhoan\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE8F8520-4972-4589-9156-B2C600366E0A}|FE\\FE.csproj|c:\\users\\fhung\\source\\repos\\base-net-core\\doan_project1\\fe\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE8F8520-4972-4589-9156-B2C600366E0A}|FE\\FE.csproj|solutionrelative:fe\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE8F8520-4972-4589-9156-B2C600366E0A}|FE\\FE.csproj|c:\\users\\fhung\\source\\repos\\base-net-core\\doan_project1\\fe\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE8F8520-4972-4589-9156-B2C600366E0A}|FE\\FE.csproj|solutionrelative:fe\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F45E240-B248-46F7-BE22-E32CDECD86F1}|Repository\\Repository.csproj|c:\\users\\fhung\\source\\repos\\base-net-core\\doan_project1\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F45E240-B248-46F7-BE22-E32CDECD86F1}|Repository\\Repository.csproj|solutionrelative:repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F45E240-B248-46F7-BE22-E32CDECD86F1}|Repository\\Repository.csproj|c:\\users\\fhung\\source\\repos\\base-net-core\\doan_project1\\repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F45E240-B248-46F7-BE22-E32CDECD86F1}|Repository\\Repository.csproj|solutionrelative:repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F45E240-B248-46F7-BE22-E32CDECD86F1}|Repository\\Repository.csproj|c:\\users\\fhung\\source\\repos\\base-net-core\\doan_project1\\repository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F45E240-B248-46F7-BE22-E32CDECD86F1}|Repository\\Repository.csproj|solutionrelative:repository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 361,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 126,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 18,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BaseController.cs",
+              "DocumentMoniker": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\FE\\Controllers\\BaseController.cs",
+              "RelativeDocumentMoniker": "FE\\Controllers\\BaseController.cs",
+              "ToolTip": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\FE\\Controllers\\BaseController.cs",
+              "RelativeToolTip": "FE\\Controllers\\BaseController.cs",
+              "ViewState": "AgIAAJIAAAAAAAAAAAArwJ0AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T08:56:52.652Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\FE\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "FE\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\FE\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "FE\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwB8AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T08:56:43.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\Repository\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Repository\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\Repository\\UnitOfWork.cs",
+              "RelativeToolTip": "Repository\\UnitOfWork.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T07:45:12.236Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\Repository\\Repository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository.cs",
+              "ToolTip": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\Repository\\Repository.cs",
+              "RelativeToolTip": "Repository\\Repository.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAwwGIAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T07:43:12.649Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\Repository\\IRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\IRepository.cs",
+              "ToolTip": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\Repository\\IRepository.cs",
+              "RelativeToolTip": "Repository\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T07:43:02.009Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "taiKhoanController.cs",
+              "DocumentMoniker": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\BE\\Controllers\\TAIKHOAN\\taiKhoanController.cs",
+              "RelativeDocumentMoniker": "BE\\Controllers\\TAIKHOAN\\taiKhoanController.cs",
+              "ToolTip": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\BE\\Controllers\\TAIKHOAN\\taiKhoanController.cs",
+              "RelativeToolTip": "BE\\Controllers\\TAIKHOAN\\taiKhoanController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwCEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-14T09:11:46.079Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TAIKHOANService.cs",
+              "DocumentMoniker": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\Service\\TAIKHOAN\\TAIKHOANService.cs",
+              "RelativeDocumentMoniker": "Service\\TAIKHOAN\\TAIKHOANService.cs",
+              "ToolTip": "C:\\Users\\FHUNG\\source\\repos\\BASE-NET-CORE\\DoAn_Project1\\Service\\TAIKHOAN\\TAIKHOANService.cs",
+              "RelativeToolTip": "Service\\TAIKHOAN\\TAIKHOANService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-30T17:22:57.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
