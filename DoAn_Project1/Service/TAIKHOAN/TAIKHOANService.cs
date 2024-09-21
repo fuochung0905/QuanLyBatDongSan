@@ -95,6 +95,11 @@ namespace Service.TAIKHOAN
             return response;
         }
 
+        public BaseResponse<MODELTaiKhoan> Insert(PostTaiKhoanRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
         public BaseResponse<List<MODELPhanQuyen>> GetPhanQuyen(GetPhanQuyenRequest request)
         {
             var response = new BaseResponse<List<MODELPhanQuyen>>();

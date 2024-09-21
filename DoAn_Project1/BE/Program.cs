@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using BE;
 using Entity.DBContent;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -39,11 +39,21 @@ builder.Services.AddCors(options =>
         builder =>
         {
             builder
+                .WithOrigins("http://localhost:4200") 
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-                .AllowCredentials().SetIsOriginAllowed((hosts) => true);
+                .AllowCredentials(); 
         });
 });
+//builder.Services.ConfigureApplicationCookie(options =>
+//{
+//    options.Cookie.HttpOnly = true; // Đặt HttpOnly cho cookie
+//    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Sử dụng cookie an toàn (chỉ qua HTTPS)
+//    options.Cookie.SameSite = SameSiteMode.Strict; // Cấu hình SameSite nếu cần
+//    options.Cookie.IsEssential = true;
+//    // Các tùy chọn khác...
+//});
+
 
 builder.Services.Config(configuration);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -70,8 +80,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-
+app.UseAuthentication();
+app.UseCors("AllowSpecificOrigin");
 app.UseAuthorization();
 
 app.MapControllers();
