@@ -7,7 +7,7 @@ namespace Service.TAIKHOAN
 	public interface ITAIKHOANService
 	{
 		BaseResponse<MODELTaiKhoanPhanQuyen> Login(LoginRequest request);
-
+		BaseResponse<MODELTaiKhoan> Insert(PostTaiKhoanRequest request);
 
 
 	}

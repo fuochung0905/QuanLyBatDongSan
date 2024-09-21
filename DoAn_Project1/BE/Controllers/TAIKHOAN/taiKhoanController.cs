@@ -37,7 +37,14 @@ namespace BE.Controllers.TAIKHOAN
 				}
 				else
 				{
-					
+					HttpContext.Response.Cookies.Append("token", result.Data.TaiKhoan.Token ?? "", new CookieOptions
+					{
+						HttpOnly = true,
+						SameSite = SameSiteMode.Strict,
+						Secure = true,
+						IsEssential = true
+				
+					});
 					return Ok(new ApiOkResponse(result.Data));
 				}
 			}
@@ -46,5 +53,13 @@ namespace BE.Controllers.TAIKHOAN
 				return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.NotImplemented, ex.Message));
 			}
 		}
+
+        [HttpPost]
+        [Route("logout")]
+        public IActionResult Logout()
+        {
+			Response.Cookies.Delete("token");
+            return Ok(new { success = true, message = "Logout thành công." });
+        }
 	}
 }
