@@ -1,0 +1,26 @@
+export class MODELTaiKhoan {
+    Id!: string | null;
+    UserName!: string | null;
+    VaiTro!: string | null;
+    VaiTroId!: string | null;
+    Tinh!: string | null;
+    TinhId!: string | null;
+    Huyen!: string | null;
+    HuyenId!: string | null;
+    Xa!: string | null;
+    XaId!: string | null;
+    DonViId!: string | null;
+    DonVi!: string | null;
+    PhongBanId!: string | null;
+    PhongBan!: string | null;
+    SoDienTho!: string | null;
+    Email!: string | null;
+    HoLot!: string | null;
+    Ten!: string | null;
+    NgaySinh!: Date | null;
+    GioiTinh!: number | null;
+    BoCucGiaoDien!: number | null;
+    AnhDaiDien!: string | null;
+    Guid!: string | null;
+    Token!: string | null; 
+}
