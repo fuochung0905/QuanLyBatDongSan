@@ -5,6 +5,7 @@ namespace Repository
     public interface IRepository<T> : IDisposable where T : class
     {
         IQueryable<T> GetAll();
+        IQueryable<T> GetAll(Expression<Func<T, bool>> predicate, string[] includes = null);
         T GetById(Guid id);
         T Find(Expression<Func<T, bool>> match);
         void add(T entity);

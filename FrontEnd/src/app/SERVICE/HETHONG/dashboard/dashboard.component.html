@@ -1,0 +1,52 @@
+
+    <div class="admin-layout-main">
+      <div class="admin-sidebar">
+        <form class="form-inline" >
+          <button type="submit" class="logout-btn nav-link btn btn-link text-light"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+        </form>
+        <div class="admin-profile">
+         
+          <img  class="img"  style="width: 50px; height: 50px;" >
+          <div class="name">
+            <span id="username">ADMIN</span>
+          </div>
+        </div>
+        <div class="side-bar">
+          <div class="menu" (click)="toggleSubMenu($event)">
+            <div class="item">
+                    @for (header of nhomQuyens; track $index) {
+                        @if (this.checkNhomQuyenId(header.id)) {
+                            <a class="sub-btn">{{header.tenGoi}}<i class="fa-solid fa-angle-down"></i></a>
+                        }
+                        <div class="sub-menu">
+                    @for (item of getMenuPhanQuyen(header.id); track $index) {
+                        <a routerLink="/admin/add-category" routerLinkActive="active" class="sub-item">{{item.tenGoi}}</a>
+                    }
+                    </div>
+                    }
+                </div>
+            @if(userName === "admin"){
+                <div class="item">
+                    <a class="sub-btn">ADMINISTRATOR<i class="fa-solid fa-angle-down"></i></a>
+                    <div class="sub-menu">
+                        <a routerLink="/admin/add-category" routerLinkActive="active" class="sub-item">Menu</a>
+                        <a routerLink="/admin/add-category" routerLinkActive="active" class="sub-item">Nhóm quyền</a>
+                    </div>
+                </div>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="admin-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  <script>
+    $(document).ready(function () {
+      $(".menu .item").click(function () {
+        console.log(1)
+      });
+    });
+  
+  </script>

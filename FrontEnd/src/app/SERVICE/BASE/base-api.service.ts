@@ -11,6 +11,7 @@ import { LoginRequest } from '../../REQUEST/HETHONG/TAIKHOAN/login-request';
 })
 export class BaseAPIService {
   private baseUrl = 'https://localhost:7078/api/';
+  private currentUser! : any;
   constructor(private http: HttpClient) { }
   public GetApi<T>(action : string){
     const url = `${this.baseUrl}${action}`;
@@ -87,6 +88,12 @@ export class BaseAPIService {
       result.message = 'Lỗi hệ thống';
     }
     return result;
+  }
+  public setCurrentUser(userName : any){
+    this.currentUser = userName;
+  }
+  public getCurrentUser() : any{
+    return this.currentUser;
   }
 }
 export type { ResponseData };

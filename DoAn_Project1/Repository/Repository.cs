@@ -27,6 +27,21 @@ namespace Repository
             return (IQueryable<T>)this._dbSet;
         }
 
+        public virtual IQueryable<T> GetAll(Expression<Func<T, bool>> predicate, string[] includes = null)
+        {
+            IQueryable<T> source1;
+            if (includes != null && ((IEnumerable<string>)includes).Count<string>() > 0)
+            {
+                IQueryable<T> source2 = this._dbSet.Include<T>(((IEnumerable<string>)includes).First<string>());
+                foreach (string navigationPropertyPath in ((IEnumerable<string>)includes).Skip<string>(1))
+                    source2 = source2.Include<T>(navigationPropertyPath);
+                source1 = predicate != null ? source2.Where<T>(predicate).AsQueryable<T>() : source2.AsQueryable<T>();
+            }
+            else
+                source1 = predicate != null ? this._dbSet.Where<T>(predicate).AsQueryable<T>() : this._dbSet.AsQueryable<T>();
+            return source1.AsQueryable<T>();
+        }
+
         public virtual T GetById(Guid id)
         {
             return this._dbSet.Find((object)id);

@@ -1,6 +1,6 @@
 export class MODELTaiKhoan {
     Id!: string | null;
-    UserName!: string | null;
+    userName!: string | null;
     VaiTro!: string | null;
     VaiTroId!: string | null;
     Tinh!: string | null;

@@ -2,10 +2,10 @@ import { MODELPhanQuyen } from "./modelphan-quyen";
 import { MODELTaiKhoan } from "./modeltai-khoan";
 
 export class MODELTaiKhoanPhanQuyen {
-    TaiKhoan: MODELTaiKhoan | null = new MODELTaiKhoan;
-    Menu: MODELMenuLogin[] = [];
-    PhanQuyen: MODELPhanQuyen[] = [];
-    NhomQuyen: MODELNhomQuyenLogin[] = [];
+    taiKhoan: MODELTaiKhoan | null = new MODELTaiKhoan;
+    menu: MODELMenuLogin[] = [];
+    phanQuyen: MODELPhanQuyen[] = [];
+    nhomQuyen: MODELNhomQuyenLogin[] = [];
 }
 export class MODELMenuLogin {
     ControllerName!: string | null;
