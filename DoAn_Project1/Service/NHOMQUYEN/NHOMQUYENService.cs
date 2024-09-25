@@ -25,6 +25,24 @@ namespace Service.NHOMQUYEN
             _mapper = mapper;
         }
 
+        public BaseResponse<List<MODELNhomQuyen>> GetList()
+        {
+            var response = new BaseResponse<List<MODELNhomQuyen>>();
+            try
+            {
+                var data = _unitOfWork.GetRepository<Entity.DBContent.PHANQUYEN_NHOMQUYEN>().GetAll()
+                    .OrderBy(x => x.Sort);
+                response.Data = _mapper.Map<List<MODELNhomQuyen>>(data);
+
+            }
+            catch (Exception e)
+            {
+                response.Error = true;
+                response.Message = e.Message;
+            }
+
+            return response;
+        }
         public BaseResponse<List<MODELNhomQuyen>> GetList(GetListPagingRequest request)
         {
             var response = new BaseResponse<List<MODELNhomQuyen>>();
