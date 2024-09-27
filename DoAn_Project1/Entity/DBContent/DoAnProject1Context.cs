@@ -25,10 +25,9 @@ public partial class DoAnProject1Context : DbContext
     {
         modelBuilder.Entity<PHANQUYEN>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("PHANQUYEN");
+            entity.ToTable("PHANQUYEN");
 
+            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.ControllerName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -36,10 +35,9 @@ public partial class DoAnProject1Context : DbContext
 
         modelBuilder.Entity<PHANQUYEN_NHOMQUYEN>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("PHANQUYEN_NHOMQUYEN");
+            entity.ToTable("PHANQUYEN_NHOMQUYEN");
 
+            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Icon)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -48,17 +46,17 @@ public partial class DoAnProject1Context : DbContext
 
         modelBuilder.Entity<SYS_MENU>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("SYS_MENU");
+            entity.HasKey(e => e.ControllerName);
 
+            entity.ToTable("SYS_MENU");
+
+            entity.Property(e => e.ControllerName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.Action)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Controller)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.ControllerName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.TenGoi).HasMaxLength(500);
@@ -66,10 +64,9 @@ public partial class DoAnProject1Context : DbContext
 
         modelBuilder.Entity<TAIKHOAN>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("TAIKHOAN");
+            entity.ToTable("TAIKHOAN");
 
+            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.AnhDaiDien).HasMaxLength(500);
             entity.Property(e => e.Email)
                 .HasMaxLength(256)
@@ -91,10 +88,9 @@ public partial class DoAnProject1Context : DbContext
 
         modelBuilder.Entity<VAITRO>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("VAITRO");
+            entity.ToTable("VAITRO");
 
+            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.NgaySua).HasColumnType("datetime");
             entity.Property(e => e.NgayTao).HasColumnType("datetime");
             entity.Property(e => e.NgayXoa).HasColumnType("datetime");

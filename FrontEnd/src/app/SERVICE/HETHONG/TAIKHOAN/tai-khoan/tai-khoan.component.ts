@@ -26,8 +26,8 @@ export class TaiKhoanComponent {
     password:new FormControl()
     });
     this.loginForm=this.fb.group({
-    username:  ['',Validators.required],
-    password:  ['',Validators.required]
+    username:  [''],
+    password:  ['']
     });
   }
   login(){
