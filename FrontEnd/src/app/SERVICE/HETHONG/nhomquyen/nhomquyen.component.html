@@ -1,64 +1,166 @@
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">QUẢN LÝ NHÓM QUYỀN</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Hệ thống</a></li>
-                    <li class="breadcrumb-item active">Nhóm quyền</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-<section class="content">
-    <div class="container-fluid">
-        <p-table
-            [value]="nhomQuyenResponse" 
-            selectionMode="multiple" 
-            [(selection)]="selectedNhomQuyen" 
-            [paginator]="true" 
-            [rows]="10"
-            [rowsPerPageOptions]="[10, 25, 50]" 
-            [lazy]="true" 
-            (onLazyLoad)="loadNhomQuyenlazy($event)" 
-            [loading]="loading"
-            dataKey="id"
-            [resizableColumns]="true"
-            emptyMessage="Không có dữ liệu"
-        >
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="text-align:center;">
-                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                    </th>
-                    <th pSortableColumn="tenGoi" style="width: 300px;">Tên gọi
-                    
-                    </th>
-                    <th pSortableColumn="icon" style="width: 220px;">Icon
+<div class="card">
+    <p-toast />
+    <p-toolbar styleClass="mb-4 gap-2" >
+        <ng-template pTemplate="left">
+            <p-button
+                severity="success" 
+                label="Thêm" 
+                icon="pi pi-plus" 
+                class="mr-2" 
+                (onClick)="openNew()"
+            />
+            <p-button
+                severity="danger" 
+                label="Sửa" 
+                (onClick)="editNhomQuyen()"
+                [disabled]="!selectedNhomQuyen || !selectedNhomQuyen.length" 
+            />
+                <p-button
+                severity="danger" 
+                label="Xóa" 
+                icon="pi pi-trash" 
             
-                    </th>
-                </tr>
-            </ng-template>
+                [disabled]="!selectedNhomQuyen || !selectedNhomQuyen.length" />
+        </ng-template>
 
-            <ng-template pTemplate="body" let-nhomQuyen>
-                <tr>
-                    <td>
-                        <p-tableCheckbox [value]="nhomQuyen.id" style="text-align:center;"></p-tableCheckbox>
-                    </td>
-                    <td style="text-align:center;">{{ nhomQuyen.tenGoi }}</td>
-                    <td style="text-align:center;">{{ nhomQuyen.icon }}</td>
-                </tr>
-            </ng-template>
+        <ng-template pTemplate="right">
+            <p-fileUpload 
+                mode="basic" 
+                accept="image/*" 
+                [maxFileSize]="1000000" 
+                label="Import" 
+                chooseLabel="Import" 
+                class="mr-2 inline-block" />
+            <p-button
+                severity="help" 
+                label="Export" 
+                icon="pi pi-upload" />
+        </ng-template>
+    </p-toolbar>
 
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="3">Không có dữ liệu</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</section>
+    <p-table
+        #dt
+        [value]="nhomQuyenResponse"
+        [rows]="5"
+        [lazy]="true"
+        [paginator]="true"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [(selection)]="selectedNhomQuyen"
+        [rowHover]="true"
+        dataKey="id"
+        [totalRecords]="totalRow"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[5,10,15]"
+        (onLazyLoad)="loadNhomQuyenlazy($event)"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Quản lí nhóm quyền</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox />
+                </th>
+                <th pSortableColumn="name" style="min-width:15rem">
+                    Tên gọi 
+                </th>
+                <th>
+                    Icon
+                </th>
+               
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-nhomQuyen>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="nhomQuyen" />
+                </td>
+                <td>
+                    {{ nhomQuyen.tenGoi }}
+                </td>
+                <td>
+                    {{ nhomQuyen.icon }}
+                </td>
+       
+                <td>
+                    <p-button 
+                        icon="pi pi-pencil" 
+                        class="mr-2" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                        severity="success" 
+                         />
+                    <p-button 
+                        icon="pi pi-trash" 
+                        severity="danger" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                         />
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{ nhomQuyenResponse ? nhomQuyenResponse.length : 0 }} products.
+            </div>
+        </ng-template>
+    </p-table>
+    <p-dialog 
+    [(visible)]="nhomQuyentDialog" 
+    [style]="{ width: '450px' }" 
+    header="Nhóm Quyền" 
+    [modal]="true" 
+    styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <input type="hidden" [(ngModel)]="postNhomQuyenRequest.isEdit" [value]="postNhomQuyenRequest.isEdit">
+            <input type="hidden" [(ngModel)]="postNhomQuyenRequest.id" [value]="postNhomQuyenRequest.id">
+            <div class="field">
+                <label for="name">Tên gọi</label>
+                <input 
+                    type="text" 
+                    pInputText 
+                    id="name" 
+                    [value]="postNhomQuyenRequest.tenGoi"
+                    [(ngModel)]="postNhomQuyenRequest.tenGoi" 
+                    required 
+                    autofocus />
+                <small class="p-error" *ngIf="submitted && !postNhomQuyenRequest.tenGoi">
+                    Tên không được để trống
+                </small>
+            </div>
+            <div class="field">
+                <label for="description">Icon</label>
+                <textarea 
+                    id="description" 
+                    pInputTextarea 
+                    [(ngModel)]="postNhomQuyenRequest.icon" 
+                    [value]="postNhomQuyenRequest.icon"
+                    required 
+                    rows="1" 
+                    cols="20">
+                </textarea>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <p-button 
+                label="Cancel" 
+                icon="pi pi-times" 
+                [text]="true" 
+                (onClick)="hideDialog()" />
+            <p-button
+                label="Save" 
+                icon="pi pi-check" 
+                [text]="true" 
+                (onClick)="saveNhomQuyen()"
+                 />
+        </ng-template>
+</p-dialog>
+    <p-confirmDialog [style]="{ width: '450px' }" />
+</div>

@@ -91,6 +91,30 @@ namespace BE.Controllers.HETHONG.NHOMQUYEN
                 return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError));
             }
         }
+        [HttpPost, Route("update")]
+        public IActionResult Update(PostNhomQuyenRequest request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
+                }
+                var result = _service.Update(request);
+                if (result.Error)
+                {
+                    throw new Exception(result.Message);
+                }
+                else
+                {
+                    return Ok(new ApiOkResponse(result.Data));
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError));
+            }
+        }
 
     }
 }

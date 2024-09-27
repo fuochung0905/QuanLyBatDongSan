@@ -10,7 +10,12 @@ namespace Model.HETHONG.NHOMQUYEN.Dtos
     public class MODELNhomQuyen : MODELBase
     {
         public Guid Id { get; set; }
-        public string TenGoi { get; set; }
-        public string Icon { get; set; }
+
+        public string TenGoi { get; set; } = null!;
+
+
+        public string? Icon { get; set; }
+
+        public bool IsActived { get; set; }
     }
 }

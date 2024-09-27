@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoDependencyRegistration.Attributes;
 using AutoMapper;
 using Entity.DBContent;
+using Microsoft.Data.SqlClient;
 using Model.BASE;
 using Model.HETHONG.NHOMQUYEN.Dtos;
 using Model.HETHONG.NHOMQUYEN.Requests;
@@ -43,14 +44,33 @@ namespace Service.NHOMQUYEN
 
             return response;
         }
-        public BaseResponse<List<MODELNhomQuyen>> GetList(GetListPagingRequest request)
+        public BaseResponse<GetListPagingResponse> GetList(GetListPagingRequest request)
         {
-            var response = new BaseResponse<List<MODELNhomQuyen>>();
+            var response = new BaseResponse<GetListPagingResponse>();
             try
             {
-                var data = _unitOfWork.GetRepository<Entity.DBContent.PHANQUYEN_NHOMQUYEN>().GetAll()
-                    .OrderBy(x => x.Sort);
-                response.Data = _mapper.Map<List<MODELNhomQuyen>>(data);
+                SqlParameter iTotalRow = new SqlParameter()
+                {
+                    ParameterName = "@oTotalRow",
+                    SqlDbType = System.Data.SqlDbType.BigInt,
+                    Direction = System.Data.ParameterDirection.Output
+                };
+
+                var parameters = new[]
+                {
+                    new SqlParameter("@iTextSearch", request.TextSearch),
+                    new SqlParameter("@iPageIndex", request.PageIndex),
+                    new SqlParameter("@iRowsPerPage", request.RowPerPage),
+                    iTotalRow
+                };
+
+                var result = _unitOfWork.GetRepository<MODELNhomQuyen>().ExcuteStoredProcedure("sp_HT_NhomQuyen_GetListPaging", parameters).ToList();
+                GetListPagingResponse resposeData = new GetListPagingResponse();
+                resposeData.PageIndex = request.PageIndex;
+                resposeData.Data = result;
+                resposeData.TotalRow = Convert.ToInt32(iTotalRow.Value);
+
+                response.Data = resposeData;
 
             }
             catch (Exception e)
@@ -114,13 +134,20 @@ namespace Service.NHOMQUYEN
             var response = new BaseResponse<MODELNhomQuyen>();
             try
             {
-                var update = _unitOfWork.GetRepository<PHANQUYEN_NHOMQUYEN>().Find(x => x.TenGoi == request.TenGoi);
-                if (update != null)
+                var update = _unitOfWork.GetRepository<PHANQUYEN_NHOMQUYEN>().Find(x => x.Id == request.Id);
+                if (update == null)
                 {
                     throw new Exception("Dữ liệu đã tồn tại");
                 }
                 else
                 {
+                    var check = _unitOfWork.GetRepository<PHANQUYEN_NHOMQUYEN>().GetAll(x => x.Id != request.Id && request.TenGoi == x.TenGoi);
+                    if (check == null)
+                    {
+                        throw new Exception("Tên không được trùng");
+                    }
+
+
                     _mapper.Map(request, update);
                     _unitOfWork.GetRepository<PHANQUYEN_NHOMQUYEN>().update(update);
                     _unitOfWork.Commit();
@@ -148,6 +175,36 @@ namespace Service.NHOMQUYEN
             
             }).OrderBy(x=>x.Text).ToList();
             return response;
+        }
+
+        public BaseResponse<string> Delete(DeleteRequest request)
+        {
+            var response = new BaseResponse<string>();
+            try
+            {
+                var delete = _unitOfWork.GetRepository<PHANQUYEN_NHOMQUYEN>().Find(x => x.Id == request.Id);
+                if (delete != null)
+                {
+                }
+                else
+                {
+                    throw new Exception("Không tìm thấy dữ liệu");
+                }
+                _unitOfWork.Commit();
+                response.Data = request.Id.ToString();
+            }
+            catch (Exception ex)
+            {
+                response.Error = true;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        public BaseResponse<string> DeleteList(DeleteListRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

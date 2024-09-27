@@ -4,6 +4,7 @@ import { MODELNhomQuyen } from '../../../MODEL/HETHONG/NHOMQUYEN/modelnhom-quyen
 import { HeaderComponent } from "../header/header.component";
 import { RouterOutlet } from '@angular/router';
 
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -23,14 +24,15 @@ export class DashboardComponent implements OnInit{
 
   }
   checkNhomQuyenId(menuId : any): boolean {
+    
    if(this.menus.filter(x => x.nhomQuyenId === menuId).length > 0){
+    console.log("ĐUngs");
       return true;
+     
    }
    return false;
-
   }
   getMenu(): void{
-    console.log("Đã gọi menu");
      this.userName = sessionStorage.getItem("userName");
     let menuData = sessionStorage.getItem(this.userName + "_menu");
     if(menuData){

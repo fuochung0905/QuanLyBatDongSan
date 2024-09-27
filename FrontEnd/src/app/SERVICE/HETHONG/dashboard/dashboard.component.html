@@ -12,13 +12,13 @@
           </div>
         </div>
         <div class="side-bar">
-          <div class="menu" (click)="toggleSubMenu($event)">
-            <div class="item">
+          <div class="menus" (click)="toggleSubMenu($event)">
+            <div class="items">
                     @for (header of nhomQuyens; track $index) {
                         @if (this.checkNhomQuyenId(header.id)) {
-                            <a class="sub-btn">{{header.tenGoi}}<i class="fa-solid fa-angle-down"></i></a>
+                            <a class="sub-btns">{{header.tenGoi}}<i class="fa-solid fa-angle-down"></i></a>
                         }
-                        <div class="sub-menu">
+                        <div class="sub-menus">
                     @for (item of getMenuPhanQuyen(header.id); track $index) {
                         <a routerLink="/admin/add-category" routerLinkActive="active" class="sub-item">{{item.tenGoi}}</a>
                     }
