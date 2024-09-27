@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FE", "FE\FE.csproj", "{EE8F8520-4972-4589-9156-B2C600366E0A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CORE", "CORE", "{5B33B650-0FD8-4615-8D31-FBCCB0BC0416}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity", "Entity\Entity.csproj", "{133E50E2-0A34-4B58-99ED-B72981A82D6A}"
@@ -15,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{2F45E240-B248-46F7-BE22-E32CDECD86F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BE", "BE\BE.csproj", "{879669F5-CAC0-4720-9591-544A85277324}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BE", "BE\BE.csproj", "{879669F5-CAC0-4720-9591-544A85277324}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EE8F8520-4972-4589-9156-B2C600366E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE8F8520-4972-4589-9156-B2C600366E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE8F8520-4972-4589-9156-B2C600366E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE8F8520-4972-4589-9156-B2C600366E0A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{133E50E2-0A34-4B58-99ED-B72981A82D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{133E50E2-0A34-4B58-99ED-B72981A82D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{133E50E2-0A34-4B58-99ED-B72981A82D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
