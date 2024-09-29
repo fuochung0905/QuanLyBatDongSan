@@ -58,7 +58,7 @@ namespace Service.TAIKHOAN
 
                 }, _config);
                 data.TaiKhoan = _mapper.Map<MODELTaiKhoan>(taikhoan);
-                var vaitro = _unitOfWork.GetRepository<VAITRO>().Find(x => x.Id == data.TaiKhoan.VaiTroId);
+                var vaitro = _unitOfWork.GetRepository<Entity.DBContent.VAITRO>().Find(x => x.Id == data.TaiKhoan.VaiTroId);
                 data.TaiKhoan.VaiTro = vaitro?.TenGoi;
                 data.TaiKhoan.Guid = pass;
                 data.TaiKhoan.AnhDaiDien = string.IsNullOrWhiteSpace(taikhoan.AnhDaiDien)

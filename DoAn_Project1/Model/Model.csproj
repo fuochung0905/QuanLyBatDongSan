@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="HETHONG\VAITRO\Requests\" />
-  </ItemGroup>
-
 </Project>
