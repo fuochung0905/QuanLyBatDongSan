@@ -3,12 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { MODELNhomQuyen } from '../../../MODEL/HETHONG/NHOMQUYEN/modelnhom-quyen';
 import { HeaderComponent } from "../header/header.component";
 import { RouterOutlet } from '@angular/router';
+import {  PanelMenuModule } from 'primeng/panelmenu';
+import { SidenavComponent } from "../sidenav/sidenav.component";
+import { NhomquyenComponent } from "../nhomquyen/nhomquyen.component";
+import { VaitroComponent } from "../vaitro/vaitro.component";
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ HeaderComponent, RouterOutlet],
+  imports: [HeaderComponent, RouterOutlet, PanelMenuModule, SidenavComponent, NhomquyenComponent, VaitroComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -20,15 +24,12 @@ export class DashboardComponent implements OnInit{
   menuList: any;
   userName : any;
   ngOnInit(): void {
-    this.getMenu();
+
 
   }
   checkNhomQuyenId(menuId : any): boolean {
-    
    if(this.menus.filter(x => x.nhomQuyenId === menuId).length > 0){
-    console.log("ĐUngs");
-      return true;
-     
+       return true;
    }
    return false;
   }
@@ -46,6 +47,7 @@ export class DashboardComponent implements OnInit{
     
   }
   getMenuPhanQuyen(menuPhanQuyenId: any): MODELMenu[] {
+    console.log(this.menus.filter(x => x.nhomQuyenId === menuPhanQuyenId).map(x=>x.tenGoi));
     return this.menus.filter(x => x.nhomQuyenId === menuPhanQuyenId);
   }
 

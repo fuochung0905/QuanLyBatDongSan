@@ -16,6 +16,5 @@ namespace Model.HETHONG.NHOMQUYEN.Dtos
 
         public string? Icon { get; set; }
 
-        public bool IsActived { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 export class GetListPagingRequest {
-    TextSearch!: string;
-    TuNgay!: Date;
-    DenNgay!: Date;
-    NgayBaoCao!: Date;
-    PageIndex!: number;
-    RowPerPage!: number;
+    textSearch!: string;
+    tuNgay!: Date;
+    denNgay!: Date;
+    ngayBaoCao!: Date;
+    pageIndex!: number;
+    rowPerPage!: number;
 }

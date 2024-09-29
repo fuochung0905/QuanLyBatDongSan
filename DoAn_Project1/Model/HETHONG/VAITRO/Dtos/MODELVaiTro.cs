@@ -4,7 +4,8 @@ namespace Model.HETHONG.VAITRO.Dtos
 {
     public class MODELVaiTro : MODELBase
     {
-        public Guid Id { get; set; }
-        public string TenGoi { get; set; }
+        public Guid? Id { get; set; }
+        public string? TenGoi { get; set; }
+        public bool? IsDeleted { get; set; }
     }
 }
