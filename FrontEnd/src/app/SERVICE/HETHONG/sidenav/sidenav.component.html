@@ -15,7 +15,9 @@
         @for (header of nhomQuyens; track $index) {
             @if (this.checkNhomQuyenId(header.id)) {
         <li class="sidenav-nav-item">
-            <a  class="sidenav-nav-link">
+            <a  class="sidenav-nav-link"
+                routerLinkActive="active" 
+                [routerLinkActiveOptions]="{exact: true}">
                 <i class="sidenav-link-icon" [class]="header.icon"></i>
                 <span class="sidenav-link-text">{{header.tenGoi}}</span>
             </a>
