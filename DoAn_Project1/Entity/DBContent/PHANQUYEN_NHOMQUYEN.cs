@@ -7,11 +7,11 @@ public partial class PHANQUYEN_NHOMQUYEN
 {
     public Guid Id { get; set; }
 
-    public string TenGoi { get; set; } = null!;
+    public string? TenGoi { get; set; }
 
-    public int Sort { get; set; }
+    public int? Sort { get; set; }
 
     public string? Icon { get; set; }
 
-    public bool IsActived { get; set; }
+    public bool? IsActived { get; set; }
 }

@@ -11,6 +11,8 @@ public partial class DoAnProject1Context : DbContext
     {
     }
 
+    public virtual DbSet<LOPHOC> LOPHOCs { get; set; }
+
     public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
 
     public virtual DbSet<PHANQUYEN_NHOMQUYEN> PHANQUYEN_NHOMQUYENs { get; set; }
@@ -23,8 +25,25 @@ public partial class DoAnProject1Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<LOPHOC>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__LOPHOC__3214EC0796E2FDA2");
+
+            entity.ToTable("LOPHOC");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.NgayTao).HasColumnType("datetime");
+            entity.Property(e => e.NgayXoa).HasColumnType("datetime");
+            entity.Property(e => e.NguoiTao).HasMaxLength(100);
+            entity.Property(e => e.NguoiXoa).HasMaxLength(100);
+            entity.Property(e => e.TenGiaoVien).HasMaxLength(100);
+            entity.Property(e => e.TenLop).HasMaxLength(100);
+        });
+
         modelBuilder.Entity<PHANQUYEN>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PK__PHANQUYE__3214EC07BCC829C6");
+
             entity.ToTable("PHANQUYEN");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
@@ -35,6 +54,8 @@ public partial class DoAnProject1Context : DbContext
 
         modelBuilder.Entity<PHANQUYEN_NHOMQUYEN>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PK__PHANQUYE__3214EC07677B1ACA");
+
             entity.ToTable("PHANQUYEN_NHOMQUYEN");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
@@ -46,7 +67,7 @@ public partial class DoAnProject1Context : DbContext
 
         modelBuilder.Entity<SYS_MENU>(entity =>
         {
-            entity.HasKey(e => e.ControllerName);
+            entity.HasKey(e => e.ControllerName).HasName("PK__SYS_MENU__B652C7A3D2A267B7");
 
             entity.ToTable("SYS_MENU");
 
@@ -64,6 +85,8 @@ public partial class DoAnProject1Context : DbContext
 
         modelBuilder.Entity<TAIKHOAN>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PK__TAIKHOAN__3214EC075AD19BB7");
+
             entity.ToTable("TAIKHOAN");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
@@ -88,6 +111,8 @@ public partial class DoAnProject1Context : DbContext
 
         modelBuilder.Entity<VAITRO>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PK__VAITRO__3214EC07E8507F7F");
+
             entity.ToTable("VAITRO");
 
             entity.Property(e => e.Id).ValueGeneratedNever();

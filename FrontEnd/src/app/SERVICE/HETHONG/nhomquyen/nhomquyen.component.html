@@ -41,7 +41,7 @@
     <p-table
         #dt
         [value]="nhomQuyenResponse"
-        [rows]="1"
+        [rows]="5"
         [lazy]="true"
         [paginator]="true"
         [tableStyle]="{ 'min-width': '75rem' }"
@@ -50,7 +50,7 @@
         dataKey="id"    
         [totalRecords]="totalRow"
         [showCurrentPageReport]="true"
-        [rowsPerPageOptions]="[1,2,3]"
+        [rowsPerPageOptions]="[5,10,15]"
         (onLazyLoad)="loadNhomQuyenlazy($event)"
     >
         <ng-template pTemplate="caption">

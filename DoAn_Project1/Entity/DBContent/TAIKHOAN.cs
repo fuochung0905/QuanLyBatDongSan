@@ -7,7 +7,7 @@ public partial class TAIKHOAN
 {
     public Guid Id { get; set; }
 
-    public string UserName { get; set; } = null!;
+    public string? UserName { get; set; }
 
     public Guid? TinhId { get; set; }
 
@@ -15,7 +15,7 @@ public partial class TAIKHOAN
 
     public Guid? XaId { get; set; }
 
-    public Guid VaiTroId { get; set; }
+    public Guid? VaiTroId { get; set; }
 
     public Guid? DonViId { get; set; }
 
@@ -29,21 +29,21 @@ public partial class TAIKHOAN
 
     public string? HoLot { get; set; }
 
-    public string Ten { get; set; } = null!;
+    public string? Ten { get; set; }
 
     public DateTime? NgaySinh { get; set; }
 
-    public int GioiTinh { get; set; }
+    public int? GioiTinh { get; set; }
 
     public string? AnhDaiDien { get; set; }
 
-    public string MatKhau { get; set; } = null!;
+    public string? MatKhau { get; set; }
 
-    public string MatKhauSalt { get; set; } = null!;
+    public string? MatKhauSalt { get; set; }
 
-    public DateTime NgayTao { get; set; }
+    public DateTime? NgayTao { get; set; }
 
-    public string NguoiTao { get; set; } = null!;
+    public string? NguoiTao { get; set; }
 
     public DateTime? NgaySua { get; set; }
 
@@ -53,7 +53,7 @@ public partial class TAIKHOAN
 
     public string? NguoiXoa { get; set; }
 
-    public bool IsActived { get; set; }
+    public bool? IsActived { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public bool? IsDeleted { get; set; }
 }
