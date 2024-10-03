@@ -7,12 +7,16 @@ import {  PanelMenuModule } from 'primeng/panelmenu';
 import { SidenavComponent } from "../sidenav/sidenav.component";
 import { NhomquyenComponent } from "../nhomquyen/nhomquyen.component";
 import { VaitroComponent } from "../vaitro/vaitro.component";
-
+import { BodyComponent } from '../body/body.component';
+interface SideNavToggle{
+  screenWith: number;
+  collapsed: boolean;
+}
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [HeaderComponent, RouterOutlet, PanelMenuModule, SidenavComponent, NhomquyenComponent, VaitroComponent],
+  imports: [HeaderComponent, RouterOutlet, PanelMenuModule, SidenavComponent, NhomquyenComponent, VaitroComponent, BodyComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -23,6 +27,8 @@ export class DashboardComponent implements OnInit{
   menuPhanQuyen : MODELMenu [] = [];
   menuList: any;
   userName : any;
+  isSideNavCollapsed = false;
+  screeWidth = 0;
   ngOnInit(): void {
 
 
@@ -32,6 +38,10 @@ export class DashboardComponent implements OnInit{
        return true;
    }
    return false;
+  }
+  onToggleSideNav(data : SideNavToggle) : void{
+    this.screeWidth = data.screenWith;
+    this.isSideNavCollapsed = data.collapsed;
   }
   getMenu(): void{
      this.userName = sessionStorage.getItem("userName");
