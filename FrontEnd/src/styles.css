@@ -13,3 +13,12 @@ body{
     position: relative;
     font-family: 'Roboto';
 }
+.wrap-btn{
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 3px;
+    font-size: 15px;
+    background: transparent;
+    color: rgba(0,0,0,.9);
+}
