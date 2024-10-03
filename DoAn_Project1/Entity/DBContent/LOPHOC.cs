@@ -24,4 +24,8 @@ public partial class LOPHOC
     public bool? IsActived { get; set; }
 
     public bool? IsDeleted { get; set; }
+
+    public DateTime? NgaySua { get; set; }
+
+    public string? NguoiSua { get; set; }
 }

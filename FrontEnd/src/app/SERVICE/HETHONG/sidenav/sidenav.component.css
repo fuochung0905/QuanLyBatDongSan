@@ -1,13 +1,8 @@
-.sidenav{
-    background: #263228;
+/* .sidenav{
+    background: #fff;
     transition: all .5s ease;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    width: 5rem;
+    width: 100%;
     height: 100vh;
-    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
-
     .logo-container {
         display: flex;
         align-items: center;
@@ -85,6 +80,80 @@
         .sidenav-nav-link{
             background-color: #ffff;
             color: #000;
+        }
+    }
+} */
+.sidenav {
+    width: 100%;
+    height: 100%;
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        width: 100%;
+        margin-bottom: 30px;
+
+        a {
+            width: 80%;
+            height: 50px;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .sidenav-bar {
+        .menu {
+            width: 100%;
+
+            .menu-item {
+                list-style: none;
+                transition: all .3s ;
+                a {
+                    display: flex;
+                    align-items: center;
+                    height: 45px;
+                    font-size: 18px;
+                    color: rgba(0, 0, 0, 0.7);
+                    text-decoration: none;
+                    line-height: 1;
+                    margin-right: 0.5rem;
+                    margin-left: 0.5rem;
+                    padding-right: 1rem;
+                    padding-left: 1rem;
+                    transition: all .3s ;
+                    i {
+                        padding: 5px 15px 5px 3px;
+                        font-size: 17px;
+                    }
+
+                    span {
+                        line-height: 1;
+                    }
+
+                }
+
+                .active {
+
+                    border-radius: 0.375rem;
+                    background: #35bf762e; 
+                    color: #25975a;
+
+                }
+
+                &:hover {
+                    a {
+                        border-radius: 0.375rem;
+                        background: #35bf762e; 
+                        color: #25975a;
+
+                    }
+                }
+            }
         }
     }
 }

@@ -166,15 +166,16 @@ namespace Service.NHOMQUYEN
 
         public BaseResponse<List<MODELCombobox>> GetAllCombobox()
         {
-            BaseResponse<List<MODELCombobox>> response = new BaseResponse<List<MODELCombobox>>();
-            var data = _unitOfWork.GetRepository<PHANQUYEN_NHOMQUYEN>().GetAll(x=>x.IsActived).ToList();
-            response.Data = data.Select(x => new MODELCombobox()
-            {
-                Value = x.Id.ToString(),
-                Text = x.TenGoi
-            
-            }).OrderBy(x=>x.Text).ToList();
-            return response;
+            //BaseResponse<List<MODELCombobox>> response = new BaseResponse<List<MODELCombobox>>();
+            //var data = _unitOfWork.GetRepository<PHANQUYEN_NHOMQUYEN>().GetAll(x=>x.IsActived).ToList();
+            //response.Data = data.Select(x => new MODELCombobox()
+            //{
+            //    Value = x.Id.ToString(),
+            //    Text = x.TenGoi
+
+            //}).OrderBy(x=>x.Text).ToList();
+            //return response;
+            return null;
         }
 
         public BaseResponse<string> Delete(DeleteRequest request)

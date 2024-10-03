@@ -121,22 +121,23 @@ namespace Service.VAITRO
 
         public BaseResponse<List<MODELCombobox>> GetAllForCombobox()
         {
-            var response = new BaseResponse<List<MODELCombobox>>();
-            try
-            {
-                var data = _unitOfWork.GetRepository<Entity.DBContent.VAITRO>().GetAll(x => x.IsActived).ToList();
-                response.Data = data.Select(x => new MODELCombobox()
-                {
-                    Text = x.TenGoi,
-                    Value = x.Id.ToString()
-                }).OrderBy(x => x.Text).ToList();
-            }
-            catch (Exception ex)
-            {
-                response.Error = true;
-                response.Message = ex.Message;
-            }
-            return response;
+            //var response = new BaseResponse<List<MODELCombobox>>();
+            //try
+            //{
+            //    var data = _unitOfWork.GetRepository<Entity.DBContent.VAITRO>().GetAll(x => x.IsActived).ToList();
+            //    response.Data = data.Select(x => new MODELCombobox()
+            //    {
+            //        Text = x.TenGoi,
+            //        Value = x.Id.ToString()
+            //    }).OrderBy(x => x.Text).ToList();
+            //}
+            //catch (Exception ex)
+            //{
+            //    response.Error = true;
+            //    response.Message = ex.Message;
+            //}
+            //return response;
+            return null;
         }
 
         public BaseResponse<string> Delete(DeleteRequest request)
