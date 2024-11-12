@@ -1,1 +1,32 @@
-FROM
+version: '3.8'
+
+service:
+	backend-java:
+		build:
+			context: ./microservice
+		ports:
+		 - "8080:8080"
+		depends_on:
+		 - database
+	backend-python:
+ 		build:
+ 			context: ./machinelearn
+ 		ports:
+ 		 - "5000:5000"
+ 		depends_on:
+ 		 -database
+ 
+ database:
+ 	image: postgres:13
+ 	environment: 
+ 		POSTGRES_USER: user
+ 		POSTGRES_PASSWORD: 123456
+ 		POSTGRES_DATABASE: projectmanager
+ 	ports:
+ 	 - "5432:5432"
+ 	volumes:
+ 	 - ./database/data:/var/lib/postgresql/data
+	
+
+     
+	
