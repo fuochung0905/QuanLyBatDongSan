@@ -1,32 +1,46 @@
 version: '3.8'
 
-service:
-	backend-java:
-		build:
-			context: ./microservice
-		ports:
-		 - "8080:8080"
-		depends_on:
-		 - database
-	backend-python:
- 		build:
- 			context: ./machinelearn
- 		ports:
- 		 - "5000:5000"
- 		depends_on:
- 		 -database
- 
- database:
- 	image: postgres:13
- 	environment: 
- 		POSTGRES_USER: user
- 		POSTGRES_PASSWORD: 123456
- 		POSTGRES_DATABASE: projectmanager
- 	ports:
- 	 - "5432:5432"
- 	volumes:
- 	 - ./database/data:/var/lib/postgresql/data
-	
+services:
+  backend-java:
+    build:
+      context: ./microservice
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/projectmanager
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: 123456
+    networks:
+      - backend-network
 
-     
-	
+  backend-python:
+    build:
+      context: ./machinelearn
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgresql://user:123456@database:5432/projectmanager
+    networks:
+      - backend-network
+
+  database:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: projectmanager
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge
+
