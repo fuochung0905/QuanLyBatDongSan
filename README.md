@@ -1,7 +1,8 @@
-# Quản Lý Bất Động Sản
- Được sử dụng công nghệ C# Framework Dot net core 8 và TypeScript Framework Angular 
+# Quản Lý Dự Án Cho Sinh Viên UTC2
+ Với mô hình microservice: được sử dụng Java + Python + React
  Với thư viện primeng giúp frontend đẹp mắt hơn thuận tiện hơn
- BE được viết có sử dụng repositoty patern và unit of work patern giúp cho dự án không phụ thuộc vào cơ sỡ dữ liệu
- Sử dụng phân quyền động
- Dữ liệu được tốn ưu ở sql Server giúp việc tốc độ truy vấn nhanh chóng hơn giúp việc hạn chế việc gọi đến cơ sỡ dữ liệu 
+ Dữ liệu được tốn ưu ở PostgreSQL thông qua các cách sử dụng index giúp việc tốc độ truy vấn nhanh chóng hơn
+ Với Redis giúp lưu những thông tin truy vấn liên tục giúp hạn chế việc truy cập database giúp tốc độ truy vấn nhanh chóng
+ Sử dụng các thuật toán học máy: deduplication -> giúp hạn chế những thông tin trùng lặp
+  + Xây dựng Content-based Filtering RS [Recommender System] -> Nó sẽ gợi ý các item dựa trên hồ sơ (profiles) của người dùng hoặc dựa vào nội dung, thuộc tính (attributes) của những item tương tự như item mà người dùng đã chọn trong quá khứ
  
