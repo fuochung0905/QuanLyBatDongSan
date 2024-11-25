@@ -1,25 +1,63 @@
+using Application;
+using Infrastructure;
+using Infrastructure.Data;
+using SimpleCQRS;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // Add services to the container.
+
+    builder.Services.AddInfrastructureServices(builder.Configuration);
+    builder.Services.AddApplicationService();
+    builder.Services.AddApiServices(builder.Configuration, builder.Environment);
+    // Add services to the container.
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+    });
+    builder.Services.AddHttpContextAccessor();
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+        app.UseMigrationsEndPoint();
+        app.UseForwardedHeaders();
+    }
+    else
+    {
+        await app.InitialDatabaseAsync();
+    }
+    await app.InitialDatabaseAsync();
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+
+    app.UseAuthorization();
+    app.UseRouting();
+    app.UseCors();
+    app.UseAuthentication();
+    app.UseIdentityServer();
+    app.UseAuthorization();
+    app.MapControllers();
+    app.MapDefaultControllerRoute();
+    app.MapRazorPages();
+    app.Run();
+
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+catch(Exception ex)
+{
+    throw;
+}
