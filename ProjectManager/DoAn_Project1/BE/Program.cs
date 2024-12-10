@@ -12,7 +12,6 @@ IConfiguration configuration = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddSignalR();
 
 var sqlConnectString = builder.Configuration.GetConnectionString("DatabaseContext");

@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Files\**" />
+    <Content Remove="Files\**" />
+    <EmbeddedResource Remove="Files\**" />
+    <None Remove="Files\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DependencyInjection.AutoRegistration" Version="3.0.0" />
     <PackageReference Include="EPPlus" Version="7.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
@@ -28,7 +35,6 @@
   <ItemGroup>
     <Folder Include="Controllers\DANHMUC\" />
     <Folder Include="Controllers\QUANLIDUAN\" />
-    <Folder Include="Files\UploadFile\" />
   </ItemGroup>
 
 </Project>

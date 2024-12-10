@@ -11,6 +11,10 @@ public partial class DoAnProject1Context : DbContext
     {
     }
 
+    public virtual DbSet<KHOA> KHOAs { get; set; }
+
+    public virtual DbSet<LOP> LOPs { get; set; }
+
     public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
 
     public virtual DbSet<PHANQUYEN_NHOMQUYEN> PHANQUYEN_NHOMQUYENs { get; set; }
@@ -23,6 +27,36 @@ public partial class DoAnProject1Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<KHOA>(entity =>
+        {
+            entity.ToTable("KHOA");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.NgaySua).HasColumnType("datetime");
+            entity.Property(e => e.NgayTao).HasColumnType("datetime");
+            entity.Property(e => e.NgayXoa).HasColumnType("datetime");
+            entity.Property(e => e.NguoiSua).HasMaxLength(256);
+            entity.Property(e => e.NguoiTao).HasMaxLength(256);
+            entity.Property(e => e.NguoiXoa).HasMaxLength(256);
+            entity.Property(e => e.TenGoi).HasMaxLength(200);
+            entity.Property(e => e.TenVietTat).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<LOP>(entity =>
+        {
+            entity.ToTable("LOP");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.NgaySua).HasColumnType("datetime");
+            entity.Property(e => e.NgayTao).HasColumnType("datetime");
+            entity.Property(e => e.NgayXoa).HasColumnType("datetime");
+            entity.Property(e => e.NguoiSua).HasMaxLength(256);
+            entity.Property(e => e.NguoiTao).HasMaxLength(256);
+            entity.Property(e => e.NguoiXoa).HasMaxLength(256);
+            entity.Property(e => e.TenGoi).HasMaxLength(256);
+            entity.Property(e => e.TenVietTat).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<PHANQUYEN>(entity =>
         {
             entity
