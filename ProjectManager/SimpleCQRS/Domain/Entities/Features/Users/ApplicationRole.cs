@@ -22,7 +22,6 @@ namespace Domain.Entities.Features.Users
             LastModified = DateTimeOffset.Now;
             CreatedBy = roleName;
             LastModifiedBy = roleName;
-
         }
     }
 }
