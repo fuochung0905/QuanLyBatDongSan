@@ -15,6 +15,7 @@ namespace Domain.Entities.Features.Users
         public DateTimeOffset LastModified { get; set; }
         public string LastModifiedBy { get; set; }
         public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
+        public ApplicationRole(): base(){}
         public ApplicationRole(string roleName)
         {
             Name = roleName;
