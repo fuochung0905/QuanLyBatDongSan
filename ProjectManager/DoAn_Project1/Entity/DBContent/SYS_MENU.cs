@@ -1,4 +1,7 @@
-﻿namespace Entity.DBContent;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Entity.DBContent;
 
 public partial class SYS_MENU
 {

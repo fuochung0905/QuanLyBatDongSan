@@ -56,4 +56,8 @@ public partial class TAIKHOAN
     public bool IsActived { get; set; }
 
     public bool IsDeleted { get; set; }
+
+    public Guid? LoaiTaiKhoanId { get; set; }
+
+    public Guid? LopId { get; set; }
 }

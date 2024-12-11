@@ -22,7 +22,7 @@ function App() {
     </div>
     <div class="main-layout">
       <header class="main-header">
-        <h1>Quản lý QR code / Tạo QR code</h1>
+        <h3>Quản lý QR code / Tạo QR code</h3>
       </header>
     
       <section class="main-body">

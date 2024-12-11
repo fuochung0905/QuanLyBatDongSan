@@ -13,6 +13,8 @@ public partial class DoAnProject1Context : DbContext
 
     public virtual DbSet<KHOA> KHOAs { get; set; }
 
+    public virtual DbSet<LOAITAIKHOAN> LOAITAIKHOANs { get; set; }
+
     public virtual DbSet<LOP> LOPs { get; set; }
 
     public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
@@ -40,6 +42,21 @@ public partial class DoAnProject1Context : DbContext
             entity.Property(e => e.NguoiXoa).HasMaxLength(256);
             entity.Property(e => e.TenGoi).HasMaxLength(200);
             entity.Property(e => e.TenVietTat).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<LOAITAIKHOAN>(entity =>
+        {
+            entity.ToTable("LOAITAIKHOAN");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Ma).HasMaxLength(50);
+            entity.Property(e => e.NgaySua).HasColumnType("datetime");
+            entity.Property(e => e.NgayTao).HasColumnType("datetime");
+            entity.Property(e => e.NgayXoa).HasColumnType("datetime");
+            entity.Property(e => e.NguoiSua).HasMaxLength(256);
+            entity.Property(e => e.NguoiTao).HasMaxLength(256);
+            entity.Property(e => e.NguoiXoa).HasMaxLength(256);
+            entity.Property(e => e.TenGoi).HasMaxLength(256);
         });
 
         modelBuilder.Entity<LOP>(entity =>

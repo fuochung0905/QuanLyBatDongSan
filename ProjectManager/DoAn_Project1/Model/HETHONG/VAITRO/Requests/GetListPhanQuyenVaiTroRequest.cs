@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model.HETHONG.VAITRO.Requests
+﻿namespace Model.HETHONG.VAITRO.Requests
 {
     public class GetListPhanQuyenVaiTroRequest
     {
+        public Guid? VaiTroId { get; set; }
+        public Guid? NhomId { get; set; }
     }
 }

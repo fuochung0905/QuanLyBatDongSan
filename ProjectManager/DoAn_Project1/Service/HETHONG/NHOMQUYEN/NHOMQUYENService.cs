@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoDependencyRegistration.Attributes;
+﻿using AutoDependencyRegistration.Attributes;
 using AutoMapper;
 using Model.BASE;
 using Model.HETHONG.NHOMQUYEN.Dtos;

@@ -20,4 +20,6 @@ public partial class PHANQUYEN
     public bool IsDuyet { get; set; }
 
     public bool IsThongKe { get; set; }
+
+    public bool? IsThem { get; set; }
 }
