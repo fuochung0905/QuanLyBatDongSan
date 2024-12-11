@@ -21,6 +21,8 @@ public partial class DoAnProject1Context : DbContext
 
     public virtual DbSet<PHANQUYEN_NHOMQUYEN> PHANQUYEN_NHOMQUYENs { get; set; }
 
+    public virtual DbSet<QLCONGVIEC> QLCONGVIECs { get; set; }
+
     public virtual DbSet<SYS_MENU> SYS_MENUs { get; set; }
 
     public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
@@ -95,6 +97,30 @@ public partial class DoAnProject1Context : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.TenGoi).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<QLCONGVIEC>(entity =>
+        {
+            entity.ToTable("QLCONGVIEC");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.ActualEndDate).HasColumnType("datetime");
+            entity.Property(e => e.ActualStartDate).HasColumnType("datetime");
+            entity.Property(e => e.AssignTo).HasMaxLength(256);
+            entity.Property(e => e.ExpectedEndDate).HasColumnType("datetime");
+            entity.Property(e => e.ExpectedStartDate).HasColumnType("datetime");
+            entity.Property(e => e.GhiChu).HasMaxLength(1000);
+            entity.Property(e => e.HuongDanNhanh).HasMaxLength(1000);
+            entity.Property(e => e.KetQuaCongViec).HasMaxLength(1000);
+            entity.Property(e => e.MoTa).HasMaxLength(1000);
+            entity.Property(e => e.NgaySua).HasColumnType("datetime");
+            entity.Property(e => e.NgayXoa).HasColumnType("datetime");
+            entity.Property(e => e.NguoiKiemTra).HasMaxLength(256);
+            entity.Property(e => e.NguoiSua).HasMaxLength(256);
+            entity.Property(e => e.NguoiTao).HasMaxLength(256);
+            entity.Property(e => e.NguoiThucHien).HasMaxLength(256);
+            entity.Property(e => e.NguoiXoa).HasMaxLength(256);
+            entity.Property(e => e.TenCongViec).HasMaxLength(500);
         });
 
         modelBuilder.Entity<SYS_MENU>(entity =>
