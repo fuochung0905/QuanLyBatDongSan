@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using BE;
 using Entity.DBContent;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,16 +29,16 @@ builder.Services.AddDbContext<DoAnProject1Context>(options =>
 });
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin",
-        builder =>
-        {
-            builder
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials().SetIsOriginAllowed((hosts) => true);
-        });
+    options.AddPolicy("AllowSpecificOrigin", policy =>
+    {
+        policy
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+            .WithOrigins("http://localhost:5173")  // Thay thế với origin của bạn
+            .SetIsOriginAllowedToAllowWildcardSubdomains();  // Nếu cần cho phép subdomains
+    });
 });
-
 builder.Services.Config(configuration);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
@@ -62,10 +62,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("AllowSpecificOrigin");
 app.UseHttpsRedirection();
-
-
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllers();

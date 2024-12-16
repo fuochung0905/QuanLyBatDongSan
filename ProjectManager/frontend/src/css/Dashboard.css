@@ -1,0 +1,35 @@
+/* Style for user icon and dropdown panel */
+.user-panel {
+    position: relative;
+  }
+  
+  .user-icon {
+    cursor: pointer;
+  }
+  
+  .user-dropdown {
+    display: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    border-radius: 5px;
+  }
+  
+  .user-panel:hover .user-dropdown {
+    display: block;
+  }
+  
+  /* Optional: Style the dropdown button */
+  .user-dropdown .dropdown-item {
+    padding: 10px;
+    text-align: left;
+    background-color: white;
+    border: none;
+    width: 100%;
+  }
+  
+  .user-dropdown .dropdown-item:hover {
+    background-color: #f1f1f1;
+  }
+  

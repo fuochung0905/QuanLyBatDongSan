@@ -4,6 +4,8 @@ import Login from "./page/Login";
 import Dashboard from "./page/Dashboard";
 import Profile from "./page/Content/Profile";
 
+import 'react-toastify/dist/ReactToastify.css'; 
+
 function App() {
   return (
     <Router>
@@ -16,7 +18,9 @@ function App() {
           
         </Route>
       </Routes>
+   
     </Router>
+    
   );
 }
 

@@ -1,0 +1,17 @@
+
+.k-taskboard-columns-container {
+    display: flex;
+    flex-direction: row; 
+    overflow-x: auto; 
+    margin-top: 20px;
+  }
+  
+  .column {
+    margin: 0 10px;
+    flex-shrink: 0;
+  }
+  
+  .task-card {
+    margin: 10px 0;
+  }
+  

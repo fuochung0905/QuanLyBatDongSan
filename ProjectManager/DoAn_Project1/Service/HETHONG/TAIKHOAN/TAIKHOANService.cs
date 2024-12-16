@@ -46,7 +46,7 @@ namespace Service.HETHONG.TAIKHOAN
                 }
 
                 var pass = Encrypt_Decrypt.EncodePassword(request.Password, taikhoan.MatKhauSalt);
-                if (pass.Equals(taikhoan.MatKhau))
+                if (!pass.Equals(taikhoan.MatKhau))
                 {
                     throw new Exception("Tài khoản hoặc mật khẩu không đúng");
                 }
