@@ -1,11 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { BrowserRouter, useNavigate } from "react-router-dom";  // Sửa import
 import LoginForm from "../components/LoginForm";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const navigate = useNavigate();
+
   return (
     <div className="login-page">
       <LoginForm />

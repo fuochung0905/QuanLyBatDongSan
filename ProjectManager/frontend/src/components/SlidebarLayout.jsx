@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const SlidebarLayout = () => {
   const [menuList, setMenuList] = useState([]);
@@ -22,10 +23,6 @@ export const SlidebarLayout = () => {
     setOpenMenu(openMenu === menuId ? null : menuId);  
   };
 
-  const redirectToPage = (action, controller, groupId) => {
-    console.log(`Redirecting to ${controller}/${action}`);
-  };
-
   return (
     <div className="sidebar">
       <nav className="mt-2">
@@ -35,14 +32,14 @@ export const SlidebarLayout = () => {
               <a
                 className="nav-link"
                 href="#"
-                onClick={() => toggleMenu(header.sort)} // Mở/đóng menu
+                onClick={() => toggleMenu(header.sort)} 
                 data-bs-toggle="collapse"
                 aria-expanded={openMenu === header.sort ? 'true' : 'false'}
                 aria-controls={`ui-basic-${header.sort}`}
               >
                 <i className="icon-layout menu-icon"></i>
                 <span className="menu-title">{header.tenGoi.toUpperCase()}</span>
-                <i className={`menu-arrow ${openMenu === header.sort ? 'open' : ''}`}></i>  {/* Mũi tên */}
+                <i className={`menu-arrow ${openMenu === header.sort ? 'open' : ''}`}></i>
               </a>
               <div className={`collapse ${openMenu === header.sort ? 'show' : ''}`} id={`ui-basic-${header.sort}`}>
                 <ul className="nav flex-column sub-menu">
@@ -50,15 +47,12 @@ export const SlidebarLayout = () => {
                     .filter((menu) => menu.nhomQuyenId === header.id)  
                     .sort((a, b) => a.sort - b.sort)  
                     .map((menu, index) => {
-                      const menuAction = menu.action || 'defaultAction';
-                      const menuController = menu.controller || 'defaultController';
-                      const key = `${menuAction}_${menuController}_${index}`;  
+                      const key = `${menu.action || 'defaultAction'}_${menu.controllerName || 'defaultController'}_${index}`;
                       return (
-                        <li className="nav-item" id={`mn${menuAction}_${menuController}`} key={key}>
-                          <a href="#" onClick={() => redirectToPage(menuAction, menuController, key)} className="nav-link">
-                            {menu.tenGoi}
-                            <span className="selected" style={{ display: 'none' }} id={`sp${key}`}></span>
-                          </a>
+                        <li className="nav-item" id={`mn${menu.action}_${menu.controllerName}`} key={key}>
+                        <Link to={`/dashboard/${menu.controllerName}`} className="nav-link">
+                          {menu.tenGoi}
+                        </Link>
                         </li>
                       );
                     })}
@@ -71,21 +65,19 @@ export const SlidebarLayout = () => {
               <a className="nav-link" data-bs-toggle="collapse" href="#admin" aria-expanded="false" aria-controls="admin">
                 <i className="icon-layout menu-icon"></i>
                 <span className="menu-title">ADMINISTRATOR</span>
-                <i className={`menu-arrow ${openMenu === 'admin' ? 'open' : ''}`}></i>  {/* Mũi tên cho Admin */}
+                <i className={`menu-arrow ${openMenu === 'admin' ? 'open' : ''}`}></i>
               </a>
               <div className={`collapse ${openMenu === 'admin' ? 'show' : ''}`} id="admin">
                 <ul className="nav flex-column sub-menu">
                   <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={() => redirectToPage("index", "menu", "index_menu")}>
+                    <Link to="/dashboard/menu" className="nav-link">
                       Menu
-                      <span className="selected" style={{ display: 'none' }} id="spindex_menu"></span>
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="#" onClick={() => redirectToPage("index", "nhomquyen", "index_nhomquyen")} className="nav-link">
+                    <Link to="/dashboard/nhomQuyen" className="nav-link">
                       Nhóm quyền
-                      <span className="selected" style={{ display: 'none' }} id="spindex_nhomquyen"></span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

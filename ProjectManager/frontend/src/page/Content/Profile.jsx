@@ -52,8 +52,6 @@ const Profile = () => {
       setTaskData(event.data);
     }
   }, []);
-
-  // Hàm onDrop để cập nhật trạng thái của task
   const onDrop = (taskId, status) => {
     const updatedTasks = taskData.map((task) =>
       task.id === taskId ? { ...task, status } : task

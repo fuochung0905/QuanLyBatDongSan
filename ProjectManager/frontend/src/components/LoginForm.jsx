@@ -3,7 +3,6 @@ import api from "../api/apiService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../css/LoginForm.css";
- // Thêm file CSS mới cho giao diện đẹp
 
 const LoginForm = () => {
   const [userName, setUserName] = useState("");
@@ -18,7 +17,6 @@ const LoginForm = () => {
       userName,
       password,
     };
-
     try {
       const response = await api.post("/taiKhoan/login", credentials); 
       console.log(response);
@@ -34,7 +32,13 @@ const LoginForm = () => {
         toast.error(response.data.message); 
       }
     } catch (err) {
-        toast.error(response.data.message); 
+      if (err.response) {
+        toast.error(err.response.data.message || "Lỗi server");
+      } else if (err.request) {
+        toast.error("Không thể kết nối đến máy chủ. Vui lòng thử lại.");
+      } else {
+        toast.error("Đã có lỗi xảy ra. Vui lòng thử lại.");
+      }
     } finally {
       setLoading(false); 
     }
