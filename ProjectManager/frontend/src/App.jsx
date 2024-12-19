@@ -11,6 +11,7 @@ import VaiTroPage from './page/Content/heThong/vaiTroPage';
 import LoaiTaiKhoanPage from './page/Content/heThong/LoaiTaiKhoanPage';
 import TaiKhoanPage from './page/Content/heThong/TaiKhoanPage';
 import { AppProvider } from './data/AppContext.jsx'; 
+import DA_Workflow from './page/Content/duAn/DA_Workflow.jsx';
 function App() {
   const handleLogout = () => {
     localStorage.clear();
@@ -32,6 +33,7 @@ function App() {
             <Route path="taiKhoan" element={<TaiKhoanPage/>}/>
             {/* DUAN */}
             <Route path="duAn" element={<DA_QLQA/>}/>
+            <Route path="donVi" element={<DA_Workflow/>}/>
           </Route>
             <Route path="*" element={
               <>
