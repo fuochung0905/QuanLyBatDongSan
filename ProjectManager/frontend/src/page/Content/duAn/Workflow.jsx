@@ -11,9 +11,24 @@ import 'reactflow/dist/style.css';
 import { initialEdges } from '../../../data/edges.js';
 import { initialNodes } from '../../../data/nodes.js';
 
-
+const calculatePositions = (nodes) => {
+    const xOffset = 200;
+    const yOffset = 100;
+    let yPos = 100;
+  
+    return nodes.map((node, index) => ({
+      ...node,
+      position: {
+        x: xOffset * index,
+        y: yPos
+      }
+    }));
+  };
+  
 const Workflow = () => {
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+
+    const nodesWithPosition = calculatePositions(initialNodes);
+    const [nodes, setNodes, onNodesChange] = useNodesState(nodesWithPosition);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const [contextMenu, setContextMenu] = useState(null); 
     const [editLabel, setEditLabel] = useState(''); 
