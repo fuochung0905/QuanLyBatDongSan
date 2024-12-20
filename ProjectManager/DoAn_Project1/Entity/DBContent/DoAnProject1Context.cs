@@ -218,10 +218,9 @@ public partial class DoAnProject1Context : DbContext
 
         modelBuilder.Entity<VAITRO>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("VAITRO");
+            entity.ToTable("VAITRO");
 
+            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.NgaySua).HasColumnType("datetime");
             entity.Property(e => e.NgayTao).HasColumnType("datetime");
             entity.Property(e => e.NgayXoa).HasColumnType("datetime");
