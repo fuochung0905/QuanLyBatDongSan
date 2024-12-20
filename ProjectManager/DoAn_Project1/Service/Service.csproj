@@ -18,9 +18,7 @@
 
   <ItemGroup>
     <Folder Include="DANHMUC\GIAIDOAN\" />
-    <Folder Include="QUANLYDUAN\DUAN\" />
     <Folder Include="QUANLYDUAN\CONGVIEC\" />
-    <Folder Include="QUANLYDUAN\TRANGTHAICONGVIEC\" />
   </ItemGroup>
 
 </Project>
