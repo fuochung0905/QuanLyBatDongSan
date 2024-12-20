@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\DANHMUC\" />
     <Folder Include="Controllers\QUANLIDUAN\" />
   </ItemGroup>
 

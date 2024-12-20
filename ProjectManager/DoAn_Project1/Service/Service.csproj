@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DANHMUC\KHOA\" />
-    <Folder Include="DANHMUC\LOP\" />
     <Folder Include="DANHMUC\GIAIDOAN\" />
     <Folder Include="QUANLYDUAN\DUAN\" />
     <Folder Include="QUANLYDUAN\CONGVIEC\" />
