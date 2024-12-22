@@ -45,6 +45,7 @@ namespace REPONSITORY.HETHONG.VAITRO
 
                 var parameters = new[]
                 {
+                    new SqlParameter("@iTextSearch", request.TextSearch),
                     new SqlParameter("@iPageIndex", request.PageIndex),
                     new SqlParameter("@iRowsPerPage", request.RowPerPage),
                     iTotalRow
@@ -127,7 +128,8 @@ namespace REPONSITORY.HETHONG.VAITRO
             try
             {
                 var add = _mapper.Map<Entity.DBContent.VAITRO>(request);
-                add.NguoiTao = _contextAccessor.HttpContext.User.Identity.Name;
+                add.Id = Guid.NewGuid();
+                add.NguoiTao = "";
                 add.NgayTao = DateTime.Now;
                 add.NguoSua = _contextAccessor.HttpContext.User.Identity.Name;
                 add.NgaySua = DateTime.Now;
