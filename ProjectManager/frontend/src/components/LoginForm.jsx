@@ -47,12 +47,14 @@ const LoginForm = () => {
   return (
     <div className="login-container">
       <div className="login-form-wrapper">
-        <h2>Login</h2>
+        <div className="logo"></div>
+        <p className="desc">Login to continue</p>
         <form onSubmit={handleLogin}>
           <div className="input-group">
             <label>Username:</label>
             <input
               type="text"
+              placeholder="Username"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               required
@@ -62,6 +64,7 @@ const LoginForm = () => {
             <label>Password:</label>
             <input
               type="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

@@ -3,6 +3,7 @@ import { BrowserRouter, useNavigate } from "react-router-dom";  // Sửa import
 import LoginForm from "../components/LoginForm";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../../public/css/login.css'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Login = () => {
         pauseOnHover
         onClose={() => navigate("/dashboard")}  
       />
+
     </div>
   );
 };
