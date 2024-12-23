@@ -30,6 +30,7 @@ header {
 .main-body {
     width: 100%;
     height: calc(100vh - 55px);
+    padding: 20px 10px;
 }
 
 .body-content {
