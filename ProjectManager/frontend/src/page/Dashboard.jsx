@@ -19,8 +19,8 @@ const Dashboard = () => {
     <div className="dashboard-page">
       {/*------------------ Sidebar ------------------ */}
       <div className="sidebar-wrap">
-          <div className="logo"></div>
-          <SlidebarLayout />
+        <div className="logo"></div>
+        <SlidebarLayout />
       </div>
       {/*------------------ Main Layout ------------------ */}
       <div className="main-layout-wrap">
@@ -42,8 +42,8 @@ const Dashboard = () => {
           </header>
 
           {/* Main Body */}
-          <section className="main-body flex-grow-1 bg-light">
-            <div className="body-content m-3 bg-white p-4 rounded">
+          <section className="main-body ">
+            <div className="body-content ">
               <Outlet />
             </div>
           </section>
