@@ -3,19 +3,19 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using Model.BASE;
-using Model.DANHMUC.KHOA.Dtos;
-using Model.DANHMUC.KHOA.Requests;
+using Model.DANHMUC.GIAIDOAN.Dtos;
+using Model.DANHMUC.GIAIDOAN.Requests;
 using Repository;
 
-namespace Service.DANHMUC.KHOA
+namespace Service.DANHMUC.GIAIDOAN
 {
     [RegisterClassAsTransient]
-    public class KHOAService : IKHOAService
+    public class GIAIDOANService : IGIAIDOANService
     {
         private IUnitOfWork _unitOfWork;
         private IHttpContextAccessor _contextAccessor;
         private IMapper _mapper;
-        public KHOAService(IUnitOfWork unitOfWork, IHttpContextAccessor contextAccessor, IMapper mapper)
+        public GIAIDOANService(IUnitOfWork unitOfWork, IHttpContextAccessor contextAccessor, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -41,7 +41,7 @@ namespace Service.DANHMUC.KHOA
                 iTotalRow
             };
 
-                var result = _unitOfWork.GetRepository<MODELKhoa>().ExcuteStoredProcedure("sp_DM_KHOA_GetListPaging", parameters).ToList();
+                var result = _unitOfWork.GetRepository<MODELGiaiDoan>().ExcuteStoredProcedure("sp_DM_GIAIDOAN_GetListPaging", parameters).ToList();
                 GetListPagingResponse responseData = new GetListPagingResponse();
                 responseData.Data = result;
                 responseData.TotalRow = Convert.ToInt32(iTotalRow.Value);
@@ -56,18 +56,18 @@ namespace Service.DANHMUC.KHOA
             }
             return response;
         }
-        public BaseResponse<MODELKhoa> GetById(GetByIdRequest request)
+        public BaseResponse<MODELGiaiDoan> GetById(GetByIdRequest request)
         {
-            var response = new BaseResponse<MODELKhoa>();
+            var response = new BaseResponse<MODELGiaiDoan>();
             try
             {
-                var result = new MODELKhoa();
-                var data = _unitOfWork.GetRepository<Entity.DBContent.KHOA>().Find(x => x.Id == request.Id);
+                var result = new MODELGiaiDoan();
+                var data = _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>().Find(x => x.Id == request.Id);
                 if (data == null)
                     throw new Exception("Không tìm thấy thông tin");
                 else
                 {
-                    result = _mapper.Map<MODELKhoa>(data);
+                    result = _mapper.Map<MODELGiaiDoan>(data);
                 }
                 response.Data = result;
             }
@@ -81,13 +81,13 @@ namespace Service.DANHMUC.KHOA
         }
 
         //GET BY POST (INSERT/UPDATE)
-        public BaseResponse<PostKhoanRequest> GetByPost(GetByIdRequest request)
+        public BaseResponse<PostGiaiDoanRequest> GetByPost(GetByIdRequest request)
         {
-            var response = new BaseResponse<PostKhoanRequest>();
+            var response = new BaseResponse<PostGiaiDoanRequest>();
             try
             {
-                var result = new PostKhoanRequest();
-                var data = _unitOfWork.GetRepository<Entity.DBContent.KHOA>().Find(x => x.Id == request.Id);
+                var result = new PostGiaiDoanRequest();
+                var data = _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>().Find(x => x.Id == request.Id);
                 if (data == null)
                 {
                     result.Id = Guid.NewGuid();
@@ -95,7 +95,7 @@ namespace Service.DANHMUC.KHOA
                 }
                 else
                 {
-                    result = _mapper.Map<PostKhoanRequest>(data);
+                    result = _mapper.Map<PostGiaiDoanRequest>(data);
                     result.IsEdit = true;
                 }
                 response.Data = result;
@@ -110,28 +110,28 @@ namespace Service.DANHMUC.KHOA
         }
 
         //INSERT
-        public BaseResponse<MODELKhoa> Insert(PostKhoanRequest request)
+        public BaseResponse<MODELGiaiDoan> Insert(PostGiaiDoanRequest request)
         {
-            var response = new BaseResponse<MODELKhoa>();
+            var response = new BaseResponse<MODELGiaiDoan>();
             try
             {
-                var isExist = _unitOfWork.GetRepository<Entity.DBContent.KHOA>()
-                    .Find(x => x.TenVietTat == request.TenVietTat || x.TenGoi == request.TenGoi);
+                var isExist = _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>()
+                    .Find(x => x.Ma == request.Ma || x.TenGoi == request.TenGoi);
                 if (isExist != null)
                 {
                     throw new Exception("Dữ liệu đã tồn tại");
                 }
-                var add = _mapper.Map<Entity.DBContent.KHOA>(request);
+                var add = _mapper.Map<Entity.DBContent.GIAIDOAN>(request);
                 add.Id = Guid.NewGuid();
                 add.NguoiTao = "";
-                add.NgayTao = DateTime.Now;
+ 
                 add.NguoiSua = _contextAccessor.HttpContext.User.Identity.Name;
                 add.NgaySua = DateTime.Now;
-              
-                _unitOfWork.GetRepository<Entity.DBContent.KHOA>().Add(add);
+
+                _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>().Add(add);
                 _unitOfWork.Commit();
 
-                response.Data = _mapper.Map<MODELKhoa>(add);
+                response.Data = _mapper.Map<MODELGiaiDoan>(add);
             }
             catch (Exception ex)
             {
@@ -143,28 +143,28 @@ namespace Service.DANHMUC.KHOA
         }
 
         //UPDATE
-        public BaseResponse<MODELKhoa> Update(PostKhoanRequest request)
+        public BaseResponse<MODELGiaiDoan> Update(PostGiaiDoanRequest request)
         {
-            var response = new BaseResponse<MODELKhoa>();
+            var response = new BaseResponse<MODELGiaiDoan>();
             try
             {
-                var isExist = _unitOfWork.GetRepository<Entity.DBContent.KHOA>()
-                    .Find(x => x.Id != request.Id && (x.TenVietTat == request.TenVietTat || x.TenGoi == request.TenGoi));
+                var isExist = _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>()
+                    .Find(x => x.Id != request.Id && (x.Ma == request.Ma || x.TenGoi == request.TenGoi));
                 if (isExist != null)
                 {
                     throw new Exception("Dữ liệu đã tồn tại");
                 }
-                var update = _unitOfWork.GetRepository<Entity.DBContent.KHOA>().Find(x => x.Id == request.Id);
+                var update = _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>().Find(x => x.Id == request.Id);
                 if (update != null)
                 {
                     _mapper.Map(request, update);
                     update.NguoiSua = _contextAccessor.HttpContext.User.Identity.Name;
                     update.NgaySua = DateTime.Now;
 
-                    _unitOfWork.GetRepository<Entity.DBContent.KHOA>().Update(update);
+                    _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>().Update(update);
                     _unitOfWork.Commit();
 
-                    response.Data = _mapper.Map<MODELKhoa>(update);
+                    response.Data = _mapper.Map<MODELGiaiDoan>(update);
                 }
                 else
                 {
@@ -186,14 +186,14 @@ namespace Service.DANHMUC.KHOA
             var response = new BaseResponse<string>();
             try
             {
-                var delete = _unitOfWork.GetRepository<Entity.DBContent.KHOA>().Find(x => x.Id == request.Id);
+                var delete = _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>().Find(x => x.Id == request.Id);
                 if (delete != null)
                 {
                     delete.IsDeleted = true;
                     delete.NguoiXoa = _contextAccessor.HttpContext.User.Identity.Name;
                     delete.NgayXoa = DateTime.Now;
 
-                    _unitOfWork.GetRepository<Entity.DBContent.KHOA>().Update(delete);
+                    _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>().Update(delete);
                 }
                 else
                 {
@@ -219,14 +219,14 @@ namespace Service.DANHMUC.KHOA
             {
                 foreach (var id in request.Ids)
                 {
-                    var delete = _unitOfWork.GetRepository<Entity.DBContent.KHOA>().Find(x => x.Id == id);
+                    var delete = _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>().Find(x => x.Id == id);
                     if (delete != null)
                     {
                         delete.IsDeleted = true;
                         delete.NguoiXoa = _contextAccessor.HttpContext.User.Identity.Name;
                         delete.NgayXoa = DateTime.Now;
 
-                        _unitOfWork.GetRepository<Entity.DBContent.KHOA>().Update(delete);
+                        _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>().Update(delete);
                     }
                     else
                     {
@@ -249,7 +249,7 @@ namespace Service.DANHMUC.KHOA
         public BaseResponse<List<MODELCombobox>> GetAllForCombobox()
         {
             BaseResponse<List<MODELCombobox>> response = new();
-            var data = _unitOfWork.GetRepository<Entity.DBContent.KHOA>()
+            var data = _unitOfWork.GetRepository<Entity.DBContent.GIAIDOAN>()
                 .GetAll(x => x.IsActived && !x.IsDeleted).ToList();
             response.Data = data.Select(x => new MODELCombobox
             {

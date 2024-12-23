@@ -7,7 +7,7 @@ using Model.BASE;
 
 namespace Model.HETHONG.TAIKHOAN.Reuquest
 {
-    public class PostTaiKhoanRequest : MODELBase
+    public class PostTaiKhoanRequest : BaseRequest
     {
         public Guid? Id { get; set; }
         public string? UserName { get; set; } = null!;

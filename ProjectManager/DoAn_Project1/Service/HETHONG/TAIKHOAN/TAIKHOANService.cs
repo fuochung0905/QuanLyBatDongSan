@@ -11,6 +11,7 @@ using Model.HETHONG.TAIKHOAN.Dtos;
 using Model.HETHONG.TAIKHOAN.Reuquest;
 using Repository;
 using Service.HETHONG.NHOMQUYEN;
+using System.Text.RegularExpressions;
 
 namespace Service.HETHONG.TAIKHOAN
 {
@@ -173,6 +174,288 @@ namespace Service.HETHONG.TAIKHOAN
         public BaseResponse<List<MODELCombobox>> GetAllForCombobox()
         {
             throw new NotImplementedException();
+        }
+
+        public BaseResponse<GetListPagingResponse> GetListPaging(GetListPagingRequest request)
+        {
+            BaseResponse<GetListPagingResponse> response = new BaseResponse<GetListPagingResponse>();
+
+            try
+            {
+                SqlParameter iTotalRow = new SqlParameter()
+                {
+                    ParameterName = "@oTotalRow",
+                    SqlDbType = System.Data.SqlDbType.BigInt,
+                    Direction = System.Data.ParameterDirection.Output
+                };
+
+
+                var parameters = new[]
+                {
+                    new SqlParameter("@iTextSearch", request.TextSearch),
+                    new SqlParameter("@iPageIndex", request.PageIndex),
+                    new SqlParameter("@iRowsPerPage", request.RowPerPage),
+                    iTotalRow
+                };
+
+                var result = _unitOfWork.GetRepository<MODELTaiKhoan>().ExcuteStoredProcedure("sp_TaiKhoan_GetListPaging", parameters).ToList();
+                GetListPagingResponse resposeData = new GetListPagingResponse();
+                resposeData.PageIndex = request.PageIndex;
+                resposeData.Data = result;
+                resposeData.TotalRow = Convert.ToInt32(iTotalRow.Value);
+                response.Data = resposeData;
+            }
+            catch (Exception ex)
+            {
+                response.Error = true;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        public BaseResponse<MODELTaiKhoan> GetById(GetByIdRequest request)
+        {
+            var response = new BaseResponse<MODELTaiKhoan>();
+            try
+            {
+                var result = new MODELTaiKhoan();
+                var data = _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Find(x => x.Id == request.Id && x.IsDeleted == false);
+                if (data == null)
+                {
+                    throw new Exception("Không tìm thấy dữ liệu");
+                }
+                else
+                {
+                    result = _mapper.Map<MODELTaiKhoan>(data);
+                    var vaiTro = _unitOfWork.GetRepository<Entity.DBContent.VAITRO>().Find(x => x.Id == result.VaiTroId);
+                    result.VaiTro = vaiTro?.TenGoi;
+                }
+                response.Data = result;
+            }
+            catch (Exception ex)
+            {
+                response.Error = true;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        public BaseResponse<PostTaiKhoanRequest> GetByPost(GetByIdRequest request)
+        {
+            var response = new BaseResponse<PostTaiKhoanRequest>();
+            try
+            {
+                var result = new PostTaiKhoanRequest();
+                var data = _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Find(x => x.Id == request.Id && x.IsDeleted == false);
+                if (data == null)
+                {
+                    result.IsEdit = false;
+                }
+                else
+                {
+                    result = _mapper.Map<PostTaiKhoanRequest>(data);
+                    result.MatKhau = "@h1h1 Đồ Ngốc";
+                    result.IsEdit = true;
+                }
+
+                response.Data = result;
+            }
+            catch (Exception ex)
+            {
+                response.Error = true;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        public BaseResponse<MODELTaiKhoan> GetByUserName(GetByUserNameRequest request)
+        {
+            var response = new BaseResponse<MODELTaiKhoan>();
+            try
+            {
+                var data = _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Find(x => x.UserName == request.UserName);
+                if (data == null)
+                    throw new Exception("KHÔNG TÌM THẤY DỮ LIỆU");
+                else
+                {
+                    var dataMap = _mapper.Map<MODELTaiKhoan>(data);
+                    dataMap.AnhDaiDien = string.IsNullOrWhiteSpace(data.AnhDaiDien) ? "~/images/no-image.png" : data.AnhDaiDien;
+                    response.Data = dataMap;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Error = true;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        public BaseResponse<MODELTaiKhoan> Insert(PostTaiKhoanRequest request)
+        {
+            var response = new BaseResponse<MODELTaiKhoan>();
+            try
+            {
+                var regexCheck = new Regex(@"^(?=[a-zA-Z])[-\w.\w@]{2,24}([a-zA-Z\d]|(?<![-.@])_)$");        
+                if (!regexCheck.IsMatch(request.UserName))
+                    throw new Exception("Tài khoản phải có độ dài từ 3 - 25. <br/>Bắt đầu phải là chữ. <br/>Chỉ bao gồm các ký tự .,_,-,@. <br/>Kết thúc không được là ký tự.");
+
+                var data = _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().GetAll(x => (x.UserName == request.UserName)
+                    && x.IsDeleted == false).FirstOrDefault();
+                if (data != null)
+                {
+                    throw new Exception("Tài khoản đã tồn tại");
+                }
+
+                var add = _mapper.Map<Entity.DBContent.TAIKHOAN>(request);
+                var salt = Encrypt_Decrypt.GenerateSalt();
+                add.MatKhauSalt = salt;
+                add.MatKhau = Encrypt_Decrypt.EncodePassword(request.MatKhau, salt);
+                add.Id = Guid.NewGuid();
+                add.AnhDaiDien = UploadAvatar(request.FolderUpload, "");
+                add.NguoiTao ="";
+                add.NgayTao = DateTime.Now;
+                add.NguoiSua ="";
+                add.NgaySua = DateTime.Now;
+
+                _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Add(add);
+                _unitOfWork.Commit();
+
+                response.Data = _mapper.Map<MODELTaiKhoan>(add);
+            }
+            catch (Exception ex)
+            {
+                response.Error = true;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        public BaseResponse<MODELTaiKhoan> Update(PostTaiKhoanRequest request)
+        {
+            bool isLogout = false;
+            var response = new BaseResponse<MODELTaiKhoan>();
+            try
+            {
+                var update = _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Find(x => x.Id == request.Id && x.UserName == request.UserName);
+                if (update != null)
+                {
+                    //NẾU CẬP NHẬT VAI TRÒ THÌ TÀI KHOẢN PHẢI LOGOUT
+                    if (update.VaiTroId != request.VaiTroId)
+                    {
+                        isLogout = true;
+                    }
+
+                    _mapper.Map(request, update);
+                    // Nếu đổi mật khẩu thì cập nhật lại mật khẩu mới
+                    if (request.MatKhau != "@h1h1 Đồ Ngốc")
+                    {
+                        //LẤY CONFIG BẢO MẬT                                    
+                        update.MatKhau = Encrypt_Decrypt.EncodePassword(request.MatKhau, update.MatKhauSalt);
+                    }
+
+                    update.AnhDaiDien = UploadAvatar(request.FolderUpload, update.AnhDaiDien);
+                    update.NguoiSua = "";
+                    update.NgaySua = DateTime.Now;
+
+                    _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Update(update);
+                    _unitOfWork.Commit();
+
+                    response.Data = _mapper.Map<MODELTaiKhoan>(update);
+                }
+                else
+                {
+                    throw new Exception("Không tìm thấy dữ liệu");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.Error = true;
+                response.Message = ex.Message;
+            }
+
+            //NẾU CẬP NHẬT VAI TRÒ THÌ TÀI KHOẢN PHẢI LOGOUT
+
+            return response;
+        }
+
+        public BaseResponse<bool> UpdateUserInfo(PostTaiKhoanInfoRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BaseResponse<MODELTaiKhoan> ChangePassword(PostChangePasswordRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BaseResponse<string> Delete(DeleteRequest request)
+        {
+            var response = new BaseResponse<string>();
+            try
+            {
+                var delete = _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Find(x => x.Id == request.Id);
+                if (delete != null)
+                {
+                    delete.IsDeleted = true;
+                    delete.NguoiXoa = "";
+                    delete.NgayXoa = DateTime.Now;
+
+                    _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Update(delete);
+                }
+                else
+                {
+                    throw new Exception("Không tìm thấy dữ liệu");
+                }
+                _unitOfWork.Commit();
+                response.Data = request.Id.ToString();
+            }
+            catch (Exception ex)
+            {
+                response.Error = true;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        public BaseResponse<string> DeleteList(DeleteListRequest request)
+        {
+            var response = new BaseResponse<string>();
+            try
+            {
+                foreach (var id in request.Ids)
+                {
+                    var delete = _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Find(x => x.Id == id);
+                    if (delete != null)
+                    {
+                        delete.IsDeleted = true;
+                        delete.NguoiXoa = "";
+                        delete.NgayXoa = DateTime.Now;
+
+                        _unitOfWork.GetRepository<Entity.DBContent.TAIKHOAN>().Update(delete);
+                    }
+                    else
+                    {
+                        throw new Exception("Không tìm thấy dữ liệu");
+                    }
+                }
+                _unitOfWork.Commit();
+                response.Data = String.Join(',', request.Ids);
+            }
+            catch (Exception ex)
+            {
+                response.Error = true;
+                response.Message = ex.Message;
+            }
+
+            return response;
         }
     }
 }

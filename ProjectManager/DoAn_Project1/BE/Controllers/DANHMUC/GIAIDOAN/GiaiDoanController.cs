@@ -1,51 +1,46 @@
 ﻿using BE.Helper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model.BASE;
-using Model.HETHONG.TAIKHOAN.Reuquest;
-using Service.HETHONG.TAIKHOAN;
+using Model.DANHMUC.GIAIDOAN.Requests;
+using Service.DANHMUC.GIAIDOAN;
 
-namespace BE.Controllers.HETHONG.TAIKHOAN
+namespace BE.Controllers.DANHMUC.GIAIDOAN
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class taiKhoanController : ControllerBase
+    public class GiaiDoanController : ControllerBase
     {
-        private ITAIKHOANService _service;
-        private IHttpContextAccessor _contextAccessor;
-
-        public taiKhoanController(ITAIKHOANService service, IHttpContextAccessor contextAccessor)
+        private IGIAIDOANService _service;
+        public GiaiDoanController(IGIAIDOANService service)
         {
             _service = service;
-            _contextAccessor = contextAccessor;
         }
-
-        [HttpPost, Route("login")]
-        [AllowAnonymous]
-        public IActionResult Login(LoginRequest request)
+        [HttpPost, Route("get-list")]
+        public IActionResult GetListPaging(GetListPagingRequest request)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError,
-                        Model.COMMON.CommonFunc.GetModelStateAPI(ModelState)));
+                    throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
                 }
-                var result = _service.Login(request);
+
+                var result = _service.GetList(request);
                 if (result.Error)
                 {
                     throw new Exception(result.Message);
                 }
                 else
                 {
-
                     return Ok(new ApiOkResponse(result.Data));
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.NotImplemented, ex.Message));
+
+                return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError, e.Message));
             }
+
         }
 
         [HttpPost, Route("get-by-id")]
@@ -98,59 +93,8 @@ namespace BE.Controllers.HETHONG.TAIKHOAN
             }
         }
 
-        [HttpPost, Route("get-by-username")]
-        public IActionResult GetByUsername(GetByUserNameRequest request)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
-                }
-                var result = _service.GetByUserName(request);
-                if (result.Error)
-                {
-                    throw new Exception(result.Message);
-                }
-                else
-                {
-                    return Ok(new ApiOkResponse(result.Data));
-                }
-            }
-            catch (Exception ex)
-            {
-                return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError, ex.Message));
-            }
-        }
-
-
-        [HttpPost, Route("get-info")]
-        public IActionResult GetInfo()
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
-                }
-                var result = _service.GetByUserName(new GetByUserNameRequest { UserName = HttpContext.User.Identity.Name });
-                if (result.Error)
-                {
-                    throw new Exception(result.Message);
-                }
-                else
-                {
-                    return Ok(new ApiOkResponse(result.Data));
-                }
-            }
-            catch (Exception ex)
-            {
-                return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError, ex.Message));
-            }
-        }
-
         [HttpPost, Route("insert")]
-        public IActionResult Insert(PostTaiKhoanRequest request)
+        public IActionResult Insert(PostGiaiDoanRequest request)
         {
             try
             {
@@ -175,7 +119,7 @@ namespace BE.Controllers.HETHONG.TAIKHOAN
         }
 
         [HttpPost, Route("update")]
-        public IActionResult Update(PostTaiKhoanRequest request)
+        public IActionResult Update(PostGiaiDoanRequest request)
         {
             try
             {
@@ -184,31 +128,6 @@ namespace BE.Controllers.HETHONG.TAIKHOAN
                     throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
                 }
                 var result = _service.Update(request);
-                if (result.Error)
-                {
-                    throw new Exception(result.Message);
-                }
-                else
-                {
-                    return Ok(new ApiOkResponse(result.Data));
-                }
-            }
-            catch (Exception ex)
-            {
-                return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError, ex.Message));
-            }
-        }
-
-        [HttpPost, Route("capnhat-info")]
-        public IActionResult CapNhatInfo(PostTaiKhoanInfoRequest request)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
-                }
-                var result = _service.UpdateUserInfo(request);
                 if (result.Error)
                 {
                     throw new Exception(result.Message);
@@ -274,8 +193,8 @@ namespace BE.Controllers.HETHONG.TAIKHOAN
             }
         }
 
-        [HttpPost, Route("get-list-paging")]
-        public IActionResult GetListPaging(GetListPagingRequest request)
+        [HttpPost, Route("get-all-combobox")]
+        public IActionResult GetAllForCombobox()
         {
             try
             {
@@ -283,7 +202,7 @@ namespace BE.Controllers.HETHONG.TAIKHOAN
                 {
                     throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
                 }
-                var result = _service.GetListPaging(request);
+                var result = _service.GetAllForCombobox();
                 if (result.Error)
                 {
                     throw new Exception(result.Message);
@@ -295,34 +214,6 @@ namespace BE.Controllers.HETHONG.TAIKHOAN
             }
             catch (Exception ex)
             {
-                return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError, ex.Message));
-            }
-        }
-
-        [HttpPost, Route("change-password")]
-        public IActionResult ChangePassword(PostChangePasswordRequest request)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
-                }
-
-                var result = _service.ChangePassword(request);
-                if (result.Error)
-                {
-                    throw new Exception(result.Message);
-                }
-                else
-                {
-                    return Ok(new ApiOkResponse(result.Data));
-                }
-            }
-            catch (Exception ex)
-            {
-                //SysLog             
-
                 return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError, ex.Message));
             }
         }

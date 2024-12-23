@@ -12,5 +12,16 @@ namespace Service.HETHONG.TAIKHOAN
         BaseResponse<List<MODELPhanQuyen>> GetPhanQuyen(GetPhanQuyenRequest request);
         BaseResponse<List<MODELCombobox>> GetAllForCombobox();
 
+        BaseResponse<GetListPagingResponse> GetListPaging(GetListPagingRequest request);
+        BaseResponse<MODELTaiKhoan> GetById(GetByIdRequest request);
+        BaseResponse<PostTaiKhoanRequest> GetByPost(GetByIdRequest request);
+        BaseResponse<MODELTaiKhoan> GetByUserName(GetByUserNameRequest request);
+        BaseResponse<MODELTaiKhoan> Insert(PostTaiKhoanRequest request);
+        BaseResponse<MODELTaiKhoan> Update(PostTaiKhoanRequest request);
+        BaseResponse<bool> UpdateUserInfo(PostTaiKhoanInfoRequest request);
+        BaseResponse<MODELTaiKhoan> ChangePassword(PostChangePasswordRequest request);
+        BaseResponse<string> Delete(DeleteRequest request);
+        BaseResponse<string> DeleteList(DeleteListRequest request);
+
     }
 }

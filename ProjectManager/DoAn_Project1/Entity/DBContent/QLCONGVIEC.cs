@@ -50,4 +50,6 @@ public partial class QLCONGVIEC
     public bool? IsActived { get; set; }
 
     public bool? IsDeleted { get; set; }
+
+    public Guid? ParentId { get; set; }
 }

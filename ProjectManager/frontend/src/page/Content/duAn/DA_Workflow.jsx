@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Workflow from '../duAn/Workflow.jsx';
-import AddConnectionForm from '../duAn/AddConnectionForm.jsx';
+
 import { initialEdges } from '../../../data/edges.js';
 
 
@@ -18,7 +18,7 @@ const DA_Workflow = () =>{
       <div>
         <h1>Workflow Management</h1>
         <Workflow edges={edges} />
-        <AddConnectionForm addConnection={addConnection} />
+     
       </div>
     );
   };

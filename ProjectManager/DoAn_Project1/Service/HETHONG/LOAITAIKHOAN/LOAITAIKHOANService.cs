@@ -122,8 +122,10 @@ public class LOAITAIKHOANService : ILOAITAIKHOANService
                 throw new Exception("Dữ liệu đã tồn tại");
             }
             var add = _mapper.Map<Entity.DBContent.LOAITAIKHOAN>(request);
-            add.NguoiTao = _contextAccessor.HttpContext.User.Identity.Name;
+            add.Id = Guid.NewGuid();
+            add.NguoiTao = "";
             add.NgayTao = DateTime.Now;
+            add.NgaySua = DateTime.Now;
             add.NguoiSua = _contextAccessor.HttpContext.User.Identity.Name;
             add.NgaySua = DateTime.Now;
             _unitOfWork.GetRepository<Entity.DBContent.LOAITAIKHOAN>().Add(add);

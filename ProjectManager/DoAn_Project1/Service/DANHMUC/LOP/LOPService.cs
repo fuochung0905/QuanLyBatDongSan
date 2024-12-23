@@ -122,7 +122,8 @@ namespace Service.DANHMUC.LOP
                     throw new Exception("Dữ liệu đã tồn tại");
                 }
                 var add = _mapper.Map<Entity.DBContent.KHOA>(request);
-                add.NguoiTao = _contextAccessor.HttpContext.User.Identity.Name;
+                add.Id = Guid.NewGuid();
+                add.NguoiTao = "";
                 add.NgayTao = DateTime.Now;
                 add.NguoiSua = _contextAccessor.HttpContext.User.Identity.Name;
                 add.NgaySua = DateTime.Now;
