@@ -10,7 +10,7 @@
 }
 
 .sidebar-wrap {
-    background: #00639d;
+    background: #1c4f95;
     width: 15%;
     border-right: 1px solid #ffffff5e;
 }
@@ -22,7 +22,7 @@
 header {
     display: flex;
     height: 55px;
-    background: #00639d;
+    background: #1c4f95;
     align-items: center;
     padding: 0px 15px;
 }

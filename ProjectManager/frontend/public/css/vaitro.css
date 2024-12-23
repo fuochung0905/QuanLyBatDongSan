@@ -80,6 +80,14 @@ tfoot {
     width: 35px ;
     height: 35px;
     position: relative;
+    font-size: 18px;
+    transition: all .2s;
+}
+.action-btn button.btn-change:hover{
+    color: #0080ff;
+}
+.action-btn button.btn-delete:hover{
+    color: #ff1900;
 }
 .btn-change{
     color: #1976d2;
