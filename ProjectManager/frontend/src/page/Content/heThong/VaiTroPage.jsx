@@ -258,7 +258,7 @@ function VaiTroPage() {
 
 
 
-      <table>
+      {/* <table>
         <thead>
           <tr>
             <th >STT</th>
@@ -310,7 +310,7 @@ function VaiTroPage() {
             </td>
           </tr>
         </tfoot>
-      </table>
+      </table> */}
     </div>
   );
 }
