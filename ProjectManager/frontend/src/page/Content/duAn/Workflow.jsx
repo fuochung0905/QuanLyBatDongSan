@@ -12,215 +12,218 @@ import { initialEdges } from '../../../data/edges.js';
 import { initialNodes } from '../../../data/nodes.js';
 
 const calculatePositions = (nodes) => {
-    const xOffset = 200;
-    const yOffset = 100;
-    let yPos = 100;
-  
-    return nodes.map((node, index) => ({
-      ...node,
-      position: {
-        x: xOffset * index,
-        y: yPos
-      }
-    }));
-  };
-  
+  const xOffset = 200;
+  const yOffset = 100;
+  let yPos = 100;
+
+  return nodes.map((node, index) => ({
+    ...node,
+    position: {
+      x: xOffset * index,
+      y: yPos
+    }
+  }));
+};
+
 const Workflow = () => {
 
-    const nodesWithPosition = calculatePositions(initialNodes);
-    const [nodes, setNodes, onNodesChange] = useNodesState(nodesWithPosition);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-    const [contextMenu, setContextMenu] = useState(null); 
-    const [editLabel, setEditLabel] = useState(''); 
-    const [showDeletePanel, setShowDeletePanel] = useState(false);
-  
-    const onNodeContextMenu = (event, node) => {
-      event.preventDefault(); // Ngăn hành động mặc định
-      setContextMenu({
-        x: event.clientX,
-        y: event.clientY,
-        type: 'node', // Menu loại node
-        node, // Lưu thông tin node
-      });
-    };
-  
-    const onEdgeContextMenu = (event, edge) => {
-      event.preventDefault();
-      setContextMenu({
-        x: event.clientX,
-        y: event.clientY,
-        type: 'edge', // Menu loại edge
-        edge, // Lưu thông tin edge
-      });
-      setEditLabel(edge.label || ''); // Đặt tên liên kết hiện tại vào trạng thái chỉnh sửa
-      setShowPanel(true); // Hiển thị panel chỉnh sửa
-      setShowDeletePanel(false); // Ẩn panel xóa khi mở panel chỉnh sửa
-    };
-  
-    // Xóa node và edges liên quan
-    const handleDeleteNode = () => {
-      if (contextMenu && contextMenu.node) {
-        const nodeToDelete = contextMenu.node;
-        setNodes((nds) => nds.filter((n) => n.id !== nodeToDelete.id)); // Xóa node
-        setEdges((eds) =>
-          eds.filter((e) => e.source !== nodeToDelete.id && e.target !== nodeToDelete.id)
-        ); // Xóa edges liên quan
-        alert(`Deleted node with ID: ${nodeToDelete.id}`);
-        setContextMenu(null); // Đóng menu
-        setShowDeletePanel(false); // Ẩn panel xóa sau khi thực hiện
-      }
-    };
-  
-    // Xóa edge
-    const handleDeleteEdge = () => {
-      if (contextMenu && contextMenu.edge) {
-        const edgeToDelete = contextMenu.edge;
-        setEdges((eds) => eds.filter((e) => e.id !== edgeToDelete.id));
-        alert(`Deleted connection:\nSource ID: ${edgeToDelete.source}\nTarget ID: ${edgeToDelete.target}`);
-        setContextMenu(null); // Đóng menu
-        setShowDeletePanel(false); // Ẩn panel xóa sau khi thực hiện
-      }
-    };
-  
-    // Cập nhật tên liên kết
-    const handleUpdateEdgeLabel = () => {
-      if (contextMenu && contextMenu.edge) {
-        const edgeToUpdate = contextMenu.edge;
-        setEdges((eds) =>
-          eds.map((e) =>
-            e.id === edgeToUpdate.id
-              ? { ...e, label: editLabel } // Cập nhật label
-              : e
-          )
-        );
-        alert(`Updated label to: "${editLabel}"`);
-        setShowPanel(false); // Ẩn panel sau khi cập nhật
-        setContextMenu(null); // Đóng menu
-      }
-    };
-  
-    // Hủy chỉnh sửa
-    const handleCancelEdit = () => {
-      setShowPanel(false); // Ẩn panel khi nhấn hủy
+  const nodesWithPosition = calculatePositions(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(nodesWithPosition);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [contextMenu, setContextMenu] = useState(null);
+  const [editLabel, setEditLabel] = useState('');
+  const [showDeletePanel, setShowDeletePanel] = useState(false);
+
+  const onNodeContextMenu = (event, node) => {
+    event.preventDefault(); // Ngăn hành động mặc định
+    setContextMenu({
+      x: event.clientX,
+      y: event.clientY,
+      type: 'node', // Menu loại node
+      node, // Lưu thông tin node
+    });
+  };
+
+  const onEdgeContextMenu = (event, edge) => {
+    event.preventDefault();
+    setContextMenu({
+      x: event.clientX,
+      y: event.clientY,
+      type: 'edge', // Menu loại edge
+      edge, // Lưu thông tin edge
+    });
+    setEditLabel(edge.label || ''); // Đặt tên liên kết hiện tại vào trạng thái chỉnh sửa
+    setShowPanel(true); // Hiển thị panel chỉnh sửa
+    setShowDeletePanel(false); // Ẩn panel xóa khi mở panel chỉnh sửa
+  };
+
+  // Xóa node và edges liên quan
+  const handleDeleteNode = () => {
+    if (contextMenu && contextMenu.node) {
+      const nodeToDelete = contextMenu.node;
+      setNodes((nds) => nds.filter((n) => n.id !== nodeToDelete.id)); // Xóa node
+      setEdges((eds) =>
+        eds.filter((e) => e.source !== nodeToDelete.id && e.target !== nodeToDelete.id)
+      ); // Xóa edges liên quan
+      alert(`Deleted node with ID: ${nodeToDelete.id}`);
       setContextMenu(null); // Đóng menu
-    };
-  
-    // Hủy xóa
-    const handleCancelDelete = () => {
-      setShowDeletePanel(false); // Ẩn panel xóa khi nhấn hủy
+      setShowDeletePanel(false); // Ẩn panel xóa sau khi thực hiện
+    }
+  };
+
+  // Xóa edge
+  const handleDeleteEdge = () => {
+    if (contextMenu && contextMenu.edge) {
+      const edgeToDelete = contextMenu.edge;
+      setEdges((eds) => eds.filter((e) => e.id !== edgeToDelete.id));
+      alert(`Deleted connection:\nSource ID: ${edgeToDelete.source}\nTarget ID: ${edgeToDelete.target}`);
       setContextMenu(null); // Đóng menu
-    };
-  
-    return (
-      <div style={{ height: '80vh', border: '1px solid #ccc', position: 'relative' }}>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onNodeContextMenu={onNodeContextMenu} // Menu ngữ cảnh cho node
-          onEdgeContextMenu={onEdgeContextMenu} // Menu ngữ cảnh cho edge
-          onConnect={(params) => setEdges((eds) => addEdge(params, eds))}
-          fitView
+      setShowDeletePanel(false); // Ẩn panel xóa sau khi thực hiện
+    }
+  };
+
+  // Cập nhật tên liên kết
+  const handleUpdateEdgeLabel = () => {
+    if (contextMenu && contextMenu.edge) {
+      const edgeToUpdate = contextMenu.edge;
+      setEdges((eds) =>
+        eds.map((e) =>
+          e.id === edgeToUpdate.id
+            ? { ...e, label: editLabel } // Cập nhật label
+            : e
+        )
+      );
+      alert(`Updated label to: "${editLabel}"`);
+      setShowPanel(false); // Ẩn panel sau khi cập nhật
+      setContextMenu(null); // Đóng menu
+    }
+  };
+
+  // Hủy chỉnh sửa
+  const handleCancelEdit = () => {
+    setShowPanel(false); // Ẩn panel khi nhấn hủy
+    setContextMenu(null); // Đóng menu
+  };
+
+  // Hủy xóa
+  const handleCancelDelete = () => {
+    setShowDeletePanel(false); // Ẩn panel xóa khi nhấn hủy
+    setContextMenu(null); // Đóng menu
+  };
+
+  return (
+    <div style={{ height: '80vh', border: '1px solid #ccc', position: 'relative' }}>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onNodeContextMenu={onNodeContextMenu} // Menu ngữ cảnh cho node
+        onEdgeContextMenu={onEdgeContextMenu} // Menu ngữ cảnh cho edge
+        onConnect={(params) => setEdges((eds) => addEdge(params, eds))}
+        fitView
+      >
+        <MiniMap />
+        <Controls />
+        <Background />
+      </ReactFlow>
+
+      {/* Menu ngữ cảnh */}
+      {contextMenu && (
+        <div
+          style={{
+            position: 'absolute',
+            top: contextMenu.y,
+            left: contextMenu.x,
+            background: '#fff',
+            boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
+            padding: '10px',
+            borderRadius: '5px',
+            zIndex: 1000,
+          }}
         >
-          <MiniMap />
-          <Controls />
-          <Background />
-        </ReactFlow>
-  
-        {/* Menu ngữ cảnh */}
-        {contextMenu && (
-          <div
+          {contextMenu.type === 'node' && (
+            <>
+              <button
+                onClick={() => setShowDeletePanel(true)} // Hiển thị panel xóa khi nhấn vào
+                style={{
+                  cursor: 'pointer',
+                  display: 'block',
+                  marginBottom: '5px',
+                }}
+              >
+                Xóa trạng thái
+              </button>
+            </>
+          )}
+          {contextMenu.type === 'edge' && (
+            <>
+              <div className="state-link">
+              <label style={{ }}>
+                Tên liên kết:
+                <input
+                  type="text"
+                  value={editLabel}
+                  onChange={(e) => setEditLabel(e.target.value)}
+                />
+              </label>
+              <button
+                className='btn-save'
+                onClick={handleUpdateEdgeLabel}
+                style={{
+                  cursor: 'pointer',
+                  display: 'block',
+                  marginBottom: '5px',
+                }}
+              >
+                Cập nhật tên
+              </button>
+              <button
+                className='btn-delete'
+                onClick={handleDeleteEdge}
+                style={{
+                  cursor: 'pointer',
+                  display: 'block',
+                }}
+              >
+                Xóa liên kết
+              </button>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
+
+      {showDeletePanel && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '20%',
+            left: '30%',
+            background: 'rgba(0,0,0,0.7)',
+            padding: '20px',
+            borderRadius: '8px',
+            zIndex: 2000,
+            width: '300px',
+            color: 'white',
+          }}
+        >
+          <h3>Chắc chắn bạn muốn xóa?</h3>
+          <button
+            onClick={handleDeleteNode}
             style={{
-              position: 'absolute',
-              top: contextMenu.y,
-              left: contextMenu.x,
-              background: '#fff',
-              boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
+              cursor: 'pointer',
               padding: '10px',
-              borderRadius: '5px',
-              zIndex: 1000,
-            }}
-          >
-            {contextMenu.type === 'node' && (
-              <>
-                <button
-                  onClick={() => setShowDeletePanel(true)} // Hiển thị panel xóa khi nhấn vào
-                  style={{
-                    cursor: 'pointer',
-                    display: 'block',
-                    marginBottom: '5px',
-                  }}
-                >
-                  Xóa trạng thái
-                </button>
-              </>
-            )}
-            {contextMenu.type === 'edge' && (
-              <>
-                <label style={{ display: 'block', marginBottom: '5px' }}>
-                  Tên liên kết:
-                  <input
-                    type="text"
-                    value={editLabel}
-                    onChange={(e) => setEditLabel(e.target.value)}
-                    style={{ marginLeft: '5px' }}
-                  />
-                </label>
-                <button
-                  onClick={handleUpdateEdgeLabel}
-                  style={{
-                    cursor: 'pointer',
-                    display: 'block',
-                    marginBottom: '5px',
-                  }}
-                >
-                  Cập nhật tên
-                </button>
-                <button
-                  onClick={handleDeleteEdge}
-                  style={{
-                    cursor: 'pointer',
-                    display: 'block',
-                  }}
-                >
-                  Xóa liên kết
-                </button>
-              </>
-            )}
-          </div>
-        )}
-  
-      
-        {showDeletePanel && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '20%',
-              left: '30%',
-              background: 'rgba(0,0,0,0.7)',
-              padding: '20px',
-              borderRadius: '8px',
-              zIndex: 2000,
-              width: '300px',
+              backgroundColor: 'red',
               color: 'white',
+              border: 'none',
+              marginRight: '10px',
             }}
           >
-            <h3>Chắc chắn bạn muốn xóa?</h3>
-            <button
-              onClick={handleDeleteNode}
-              style={{
-                cursor: 'pointer',
-                padding: '10px',
-                backgroundColor: 'red',
-                color: 'white',
-                border: 'none',
-                marginRight: '10px',
-              }}
-            >
-              Xóa trạng thái
-            </button>
-         
+            Xóa trạng thái
+          </button>
+
           <button
             onClick={handleCancelDelete}
             style={{

@@ -8,7 +8,11 @@
     overflow: hidden;
     display: flex;
 }
-
+.btn-wrap{
+    background: #ccc ;
+    border: 1.2px solid #000 ;
+    border-radius: 5px ;
+}
 .sidebar-wrap {
     background: #1c4f95;
     width: 15%;
@@ -52,7 +56,7 @@ header {
 .body-content .k-taskboard .k-taskboard-content .k-taskboard-columns-container {
     justify-content: space-around;
     height: 100%;
-    margin: 30px 0px;
+    margin-top: 15px;
 }
 
 .body-content .k-taskboard .k-taskboard-content .k-taskboard-columns-container .column {
@@ -77,4 +81,14 @@ header {
     border-radius: 15px;
     cursor: pointer;
     border-width: 1px !important;
+}
+.k-taskboard-columns-container .column .task-card h4{
+    font-size: 20px;
+}
+.k-taskboard-columns-container .column .task-card p{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.k-taskboard-columns-container .column .task-card span{
+    font-size: 14px;
 }

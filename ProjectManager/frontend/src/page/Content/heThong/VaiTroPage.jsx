@@ -138,11 +138,11 @@ function VaiTroPage() {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenInsert(false)} color="secondary">Hủy</Button>
+          <Button className='btn-wrap btn-end' onClick={() => setOpenInsert(false)} color="secondary">Hủy</Button>
           <Button
+            className='btn-wrap btn-save'
             onClick={handleSaveData}
-            color="primary"
-          >
+            color="primary" >
             Lưu
           </Button>
         </DialogActions>
@@ -193,7 +193,9 @@ function VaiTroPage() {
           <Button onClick={handleDelete} color="primary">Xóa</Button>
         </DialogActions>
       </Dialog>
+      <h1 className='title'>Vai trò thành viên</h1>
       <Button
+        className='btn-addData'
         variant="contained"
         color="primary"
         onClick={() => setOpenInsert(true)}
@@ -276,10 +278,10 @@ function VaiTroPage() {
             <td>4</td>
             <td>
               <div className="action-btn">
-                  <button className='btn-change'><i class="fa-solid fa-pen"></i></button>
-                  <button className='btn-delete'><i class="fa-solid fa-trash"></i></button>
+                <button className='btn-change'><i class="fa-solid fa-pen"></i></button>
+                <button className='btn-delete'><i class="fa-solid fa-trash"></i></button>
               </div>
-              
+
             </td>
           </tr>
           <tr>
@@ -287,14 +289,24 @@ function VaiTroPage() {
             <td>Row 2, Col 2</td>
             <td>Row 2, Col 3</td>
             <td>Row 2, Col 4</td>
-            <td>Row 2, Col 5</td>
+            <td>
+              <div className="action-btn">
+                <button className='btn-change'><i class="fa-solid fa-pen"></i></button>
+                <button className='btn-delete'><i class="fa-solid fa-trash"></i></button>
+              </div>
+            </td>
           </tr>
           <tr>
             <td>3</td>
             <td>Row 3, Col 2</td>
             <td>Row 3, Col 3</td>
             <td>Row 3, Col 4</td>
-            <td>Row 3, Col 5</td>
+            <td>
+              <div className="action-btn">
+                <button className='btn-change'><i class="fa-solid fa-pen"></i></button>
+                <button className='btn-delete'><i class="fa-solid fa-trash"></i></button>
+              </div>
+            </td>
           </tr>
         </tbody>
         <tfoot>
