@@ -26,7 +26,7 @@ function KhoaPage() {
 
   const fetchData = (pageIndex, pageSize, textSearch = "") => {
     api
-      .post('/Khoa/get-list-paging', { pageIndex, pageSize, textSearch })
+      .post('/Khoa/get-list', { pageIndex, pageSize, textSearch })
       .then((response) => {
         const dataWithSTT = response.data.result.data.map((item, index) => ({
           ...item,

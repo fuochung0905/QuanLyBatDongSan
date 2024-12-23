@@ -41,7 +41,7 @@ namespace Service.DANHMUC.LOP
                 iTotalRow
             };
 
-                var result = _unitOfWork.GetRepository<MODELLop>().ExcuteStoredProcedure("sp_DM_KHOA_GetListPaging", parameters).ToList();
+                var result = _unitOfWork.GetRepository<MODELLop>().ExcuteStoredProcedure("sp_DM_LOP_GetListPaging", parameters).ToList();
                 GetListPagingResponse responseData = new GetListPagingResponse();
                 responseData.Data = result;
                 responseData.TotalRow = Convert.ToInt32(iTotalRow.Value);

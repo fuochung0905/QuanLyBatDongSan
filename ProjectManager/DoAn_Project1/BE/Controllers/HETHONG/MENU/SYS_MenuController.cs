@@ -1,25 +1,22 @@
 ﻿using BE.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Model.BASE;
-using Model.HETHONG.NHOMQUYEN.Requests;
-using Service.HETHONG.NHOMQUYEN;
+using Model.HETHONG.MENU.Requests;
+using Service.HETHONG.MENU;
 
-namespace BE.Controllers.HETHONG
+namespace BE.Controllers.HETHONG.MENU
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class NhomQuyenController : ControllerBase
+    [Route("api/[controller]")]
+    public class SYS_MenuController : ControllerBase
     {
-        INHOMQUYENService _service;
-
-        public NhomQuyenController(INHOMQUYENService service)
+        private IMENUService _service;
+        public SYS_MenuController(IMENUService service)
         {
             _service = service;
         }
-
-        [HttpGet, Route("get-list")]
-  
-        public IActionResult GetList()
+        [HttpPost, Route("get-list-paging")]
+        public IActionResult GetListPaging(GetListPagingRequest request)
         {
             try
             {
@@ -27,7 +24,7 @@ namespace BE.Controllers.HETHONG
                 {
                     throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
                 }
-                var result = _service.GetList();
+                var result = _service.GetListPaging(request);
                 if (result.Error)
                 {
                     throw new Exception(result.Message);
@@ -69,7 +66,7 @@ namespace BE.Controllers.HETHONG
         }
 
         [HttpPost, Route("get-by-id")]
-        public IActionResult GetById(GetByIdRequest request)
+        public IActionResult GetById(GetMenuByIdRequest request)
         {
             try
             {
@@ -89,12 +86,13 @@ namespace BE.Controllers.HETHONG
             }
             catch (Exception ex)
             {
+
                 return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError, ex.Message));
             }
         }
 
         [HttpPost, Route("get-by-post")]
-        public IActionResult GetByPost(GetByIdRequest request)
+        public IActionResult GetByPost(GetMenuByIdRequest request)
         {
             try
             {
@@ -119,7 +117,7 @@ namespace BE.Controllers.HETHONG
         }
 
         [HttpPost, Route("insert")]
-        public IActionResult Insert(PostNhomQuyenRequest request)
+        public IActionResult Insert(PostMenuRequest request)
         {
             try
             {
@@ -144,7 +142,7 @@ namespace BE.Controllers.HETHONG
         }
 
         [HttpPost, Route("update")]
-        public IActionResult Update(PostNhomQuyenRequest request)
+        public IActionResult Update(PostMenuRequest request)
         {
             try
             {
@@ -153,56 +151,6 @@ namespace BE.Controllers.HETHONG
                     throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
                 }
                 var result = _service.Update(request);
-                if (result.Error)
-                {
-                    throw new Exception(result.Message);
-                }
-                else
-                {
-                    return Ok(new ApiOkResponse(result.Data));
-                }
-            }
-            catch (Exception ex)
-            {
-                return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError, ex.Message));
-            }
-        }
-
-        [HttpPost, Route("get-all-combobox")]
-        public IActionResult GetAllForCombobox()
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
-                }
-                var result = _service.GetAllForCombobox();
-                if (result.Error)
-                {
-                    throw new Exception(result.Message);
-                }
-                else
-                {
-                    return Ok(new ApiOkResponse(result.Data));
-                }
-            }
-            catch (Exception ex)
-            {
-                return Ok(new ApiResponse(false, (int)Model.COMMON.StatusCode.InternalError, ex.Message));
-            }
-        }
-
-        [HttpPost, Route("get-all-parent-combobox")]
-        public IActionResult GetAllParentForCombobox()
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(Model.COMMON.CommonFunc.GetModelStateAPI(ModelState));
-                }
-                var result = _service.GetAllParentForCombobox();
                 if (result.Error)
                 {
                     throw new Exception(result.Message);

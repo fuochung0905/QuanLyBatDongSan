@@ -12,6 +12,10 @@ import LoaiTaiKhoanPage from './page/Content/heThong/LoaiTaiKhoanPage';
 import TaiKhoanPage from './page/Content/heThong/TaiKhoanPage';
 import { AppProvider } from './data/AppContext.jsx'; 
 import DA_Workflow from './page/Content/duAn/DA_Workflow.jsx';
+import KhoaPage from './page/Content/danhMuc/KhoaPage.jsx';
+import LopPage from './page/Content/danhMuc/LopPage.jsx';
+import GiaiDoanDuAnPage from './page/Content/danhMuc/GiaiDoanDuAnPage.jsx';
+
 function App() {
   const handleLogout = () => {
     localStorage.clear();
@@ -28,12 +32,19 @@ function App() {
             <Route path="menu" element={<MenuPage />}/>
             <Route path="nhomQuyen" element={<NhomQuyenPage/>}/>
             {/* HETHONG */}
-            <Route path="vaiTro" element={<VaiTroPage/>}/>
+            <Route path="vaitro" element={<VaiTroPage/>}/>
             <Route path="loaiTaiKhoan" element={<LoaiTaiKhoanPage/>}/>
             <Route path="taiKhoan" element={<TaiKhoanPage/>}/>
             {/* DUAN */}
-            <Route path="duAn" element={<DA_QLQA/>}/>
+            <Route path="quanlyduan" element={<DA_QLQA/>}/>
+            <Route path="quanlycongviec" element={<DA_QLQA/>}/>
             <Route path="donVi" element={<DA_Workflow/>}/>
+            <Route path="trangthaicongviec" element={<Profile/>}/>
+
+            {/* DANH MỤC */}
+            <Route path="khoa" element={<KhoaPage/>}/>
+            <Route path="lop" element={<LopPage/>}/>
+            <Route path="giaidoanduan" element={<GiaiDoanDuAnPage/>}/>
           </Route>
             <Route path="*" element={
               <>

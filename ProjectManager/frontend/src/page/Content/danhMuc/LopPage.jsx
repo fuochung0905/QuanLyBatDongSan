@@ -26,7 +26,7 @@ function LopPage() {
 
   const fetchData = (pageIndex, pageSize, textSearch = "") => {
     api
-      .post('/Lop/get-list-paging', { pageIndex, pageSize, textSearch })
+      .post('/Lop/get-list', { pageIndex, pageSize, textSearch })
       .then((response) => {
         const dataWithSTT = response.data.result.data.map((item, index) => ({
           ...item,
