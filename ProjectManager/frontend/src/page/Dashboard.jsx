@@ -25,7 +25,7 @@ const Dashboard = () => {
       {/*------------------ Main Layout ------------------ */}
       <div className="main-layout-wrap">
         <div className="main-layout flex-grow-1 d-flex flex-column">
-          <header className="main-header bg-white p-3 shadow-sm d-flex justify-content-between align-items-center">
+          <header>
             {/* Header Content */}
             <div className="d-flex align-items-center ml-auto">
               {/* User Icon */}
