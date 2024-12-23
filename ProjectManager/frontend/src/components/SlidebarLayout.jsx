@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../../public/css/sidebar.css'
 
 export const SlidebarLayout = () => {
   const [menuList, setMenuList] = useState([]);
@@ -24,8 +25,8 @@ export const SlidebarLayout = () => {
   };
 
   return (
-    <div className="sidebar">
-      <nav className="mt-2">
+      
+      <nav className="sidebar">
         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           {headerList.map((header) => (
             <li className="nav-item" key={header.sort}>
@@ -85,6 +86,6 @@ export const SlidebarLayout = () => {
           )}
         </ul>
       </nav>
-    </div>
+    
   );
 };

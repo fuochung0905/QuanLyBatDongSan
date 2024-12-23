@@ -3,8 +3,9 @@ import { SlidebarLayout } from '../components/SlidebarLayout';
 import { Outlet } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FaUserCircle } from 'react-icons/fa';  
+import { FaUserCircle } from 'react-icons/fa';
 import "../css/Dashboard.css";
+import '../../public/css/dashboard.css'
 
 const Dashboard = () => {
   const [showLogoutPanel, setShowLogoutPanel] = useState(false);
@@ -15,14 +16,14 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="h-100">
-      <div className="container-fluid d-flex h-100">
-        {/* Sidebar */}
-        <div className="sidebar bg-white shadow-sm" style={{width: '250px'}}>
+    <div className="dashboard-page">
+      {/*------------------ Sidebar ------------------ */}
+      <div className="sidebar-wrap">
+          <div className="logo"></div>
           <SlidebarLayout />
-        </div>
-
-        {/* Main Layout */}
+      </div>
+      {/*------------------ Main Layout ------------------ */}
+      <div className="main-layout-wrap">
         <div className="main-layout flex-grow-1 d-flex flex-column">
           <header className="main-header bg-white p-3 shadow-sm d-flex justify-content-between align-items-center">
             {/* Header Content */}
@@ -33,7 +34,7 @@ const Dashboard = () => {
               {showLogoutPanel && (
                 <div className="user-dropdown position-absolute end-0 top-100 mt-2">
                   <div className="dropdown-menu">
-                    <button className="dropdown-item"  onClick={handleLogout}>Đăng xuất</button>
+                    <button className="dropdown-item" onClick={handleLogout}>Đăng xuất</button>
                   </div>
                 </div>
               )}
@@ -48,6 +49,8 @@ const Dashboard = () => {
           </section>
         </div>
       </div>
+
+
 
       {/* Toast Notifications */}
       <ToastContainer
