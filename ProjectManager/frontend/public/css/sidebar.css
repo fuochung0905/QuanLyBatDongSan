@@ -5,7 +5,7 @@
 .logo{
     width: 100%;
     height: 100px;
-    background-image: url(/public/images/logo-removebg.png);
+    background-image: url(/public/images/logo_utc2.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -26,7 +26,8 @@
     border-radius: unset;
 }
 .sidebar >.nav >.nav-item > .nav-link:hover{
-    background-color: #297cad;
+    background-color: #fbcc02;
+    color: #271755;
 
 }
 .sidebar >.nav >.nav-item:last-child .nav-link{
@@ -40,7 +41,8 @@
 }
 .nav-item .collapse .nav-item .nav-link:hover{
     padding-left: 30px;
-    background: #297cad;
+    background-color: #fbcc02;
+    color: #271755;
 }
 .nav-item .collapse.show{
     transition: all .2s;

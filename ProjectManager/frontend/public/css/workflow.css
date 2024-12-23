@@ -1,0 +1,76 @@
+.react-flow__node-default,
+.react-flow__node-input,
+.react-flow__node-output,
+.react-flow__node-group {
+    padding: 10px;
+    border-radius: 3px;
+    width: 150px;
+    font-size: 14px;
+    color: #28175b;
+    font-weight: 500;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #f6c904;
+    background: linear-gradient(90deg, rgba(255, 179, 0, 1) 0%, rgb(255 201 75) 49%, rgba(255, 242, 95, 1) 100%);
+}
+
+.react-flow__edge-path,
+.react-flow__connection-path {
+    stroke: #28175b;
+}
+
+.state-link label {
+    display: block;
+    margin-bottom: 15px;
+    color: #271757;
+}
+
+.state-link label input {
+    margin: 5px auto;
+    padding: 8px 5px;
+    font-size: 15px;
+    background: #fff;
+    color: #091E42;
+    border: 1px solid #7A869A;
+}
+
+.state-link label input:focus {
+    border: 1px solid #271757;
+}
+
+.state-link button {
+    background-color: unset;
+}
+
+.state-link button.btn-save {
+    background: #1966be;
+    color: #fff;
+    transition: all .3s;
+}
+
+.state-link button.btn-save:hover {
+    background: #3997ff;
+    color: #fff;
+}
+
+.state-link button.btn-delete {
+    background-color: #e74c3c;
+    color: #fff;
+    transition: all .3s;
+}
+
+.state-link button.btn-delete:hover {
+    background: #fa4a36;
+    color: #fff;
+}
+
+.react-flow__edge-textwrapper {}
+
+.react-flow__edge-textwrapper .react-flow__edge-textbg {
+    fill: #4bce97;
+}
+
+.react-flow__edge-textwrapper .react-flow__edge-text {
+    fill: #ffffff;
+}

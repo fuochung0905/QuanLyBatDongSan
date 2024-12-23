@@ -44,12 +44,12 @@
     transition: all .3s;
 }
 .login-form-wrapper button:hover{
-    background-color: #1f3960;
+    background-color: #271756;
 }
 .logo{
     width: 100%;
     height: 100px;
-    background-image: url(/public/images/logo.png);
+    background-image: url(../images/UTC2_WORKFLOW.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
