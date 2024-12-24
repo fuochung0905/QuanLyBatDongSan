@@ -175,8 +175,8 @@ function VaiTroPage() {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} color="secondary">Hủy</Button>
-          <Button onClick={handleSaveEdit} color="primary">Lưu</Button>
+          <Button className='btn-wrap btn-end' onClick={() => setOpen(false)} color="secondary">Hủy</Button>
+          <Button className='btn-wrap btn-save' onClick={handleSaveEdit} color="primary">Lưu</Button>
         </DialogActions>
       </Dialog>
 
@@ -189,8 +189,8 @@ function VaiTroPage() {
           Bạn có chắc chắn muốn xóa bản ghi này không?
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenDeleteConfirm(false)} color="secondary">Hủy</Button>
-          <Button onClick={handleDelete} color="primary">Xóa</Button>
+          <Button className='btn-wrap btn-end' onClick={() => setOpenDeleteConfirm(false)} color="secondary">Hủy</Button>
+          <Button className='btn-wrap btn-save' onClick={handleDelete} color="primary">Xóa</Button>
         </DialogActions>
       </Dialog>
       <h1 className='title'>Vai trò thành viên</h1>
@@ -224,6 +224,7 @@ function VaiTroPage() {
             renderCell: (params) => (
               <>
                 <IconButton
+                  className='btn-row'
                   color="primary"
                   onClick={() => handleEditClick(params.row)}
                   sx={{
@@ -235,6 +236,7 @@ function VaiTroPage() {
                   <EditIcon />
                 </IconButton>
                 <IconButton
+                  className='btn-row'
                   color="secondary"
                   onClick={() => handleDeleteClick(params.row)}
                   sx={{
