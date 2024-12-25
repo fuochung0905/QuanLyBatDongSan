@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
+import SecurityIcon from '@mui/icons-material/Security';
 import api from "../../../api/apiService.js";
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import '../../../../public/css/vaitro.css'
@@ -20,6 +21,9 @@ function VaiTroPage() {
   const [totalRecords, setTotalRecords] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(3);
+  const [openPermissionDialog, setOpenPermissionDialog] = useState(false);
+  const [permissionData, setPermissionData] = useState(null);
+
 
   useEffect(() => {
     fetchData(pageIndex, pageSize);
@@ -42,6 +46,19 @@ function VaiTroPage() {
       });
   };
 
+
+  const handlePermissionClick = (row) => {
+    api.post('/VaiTro/get-detail', { id: row.id })
+      .then((response) => {
+        setPermissionData(response.data); 
+        setOpenPermissionDialog(true);  
+      })
+      .catch((error) => {
+        toast.error('Không thể lấy thông tin vai trò!');
+        console.error(error);
+      });
+  };
+  
   const handlePageChange = (newPage) => {
     setPageIndex(newPage);
   };
@@ -245,6 +262,17 @@ function VaiTroPage() {
                 >
                   <DeleteIcon />
                 </IconButton>
+                <IconButton
+                color="info"
+                onClick={() => handlePermissionClick(params.row)} 
+                sx={{
+                  marginRight: 1,
+                  display: 'inline-block',
+                  width: 'auto'
+                }}
+              >
+                <SecurityIcon /> 
+              </IconButton>
               </>
             ),
           },
