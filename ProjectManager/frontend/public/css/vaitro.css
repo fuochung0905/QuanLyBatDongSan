@@ -184,3 +184,43 @@ tfoot {
     background: #e74c3c;
     color: #fff;
 }
+.css-yseucu-MuiDataGrid-columnHeaderRow{
+    background-color: #fcffe8 !important;
+}
+.css-yseucu-MuiDataGrid-columnHeaderRow .MuiDataGrid-columnHeaderTitle{
+    font-weight: 600;
+}
+.MuiDataGrid-row{
+    background-color:#fff;
+}
+.MuiDataGrid-row:nth-child(even){
+    background-color: #f9f9f9 !important;
+}
+.MuiDataGrid-row:hover{
+    background-color: #f9f9f9 !important;
+}
+.btn-row{
+    width: 40px !important;
+    height: 40px !important;
+    position: relative  !important;
+}
+.btn-row svg{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.MuiTablePagination-root p{
+    margin: 0;
+}
+.MuiTablePagination-root  .MuiTablePagination-actions{
+    display: flex;
+}
+.MuiTablePagination-root  .MuiTablePagination-actions button{
+    width: 30px;
+    cursor: pointer;
+    pointer-events: unset;
+}
+.MuiTablePagination-root  .MuiTablePagination-actions button:hover{
+   color: #3997ff;
+}
