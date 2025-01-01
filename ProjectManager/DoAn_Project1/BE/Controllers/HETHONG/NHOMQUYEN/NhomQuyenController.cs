@@ -43,7 +43,7 @@ namespace BE.Controllers.HETHONG
             }
         }
 
-        [HttpPost, Route("get-all")]
+        [HttpGet, Route("get-all")]
         public IActionResult GetAll()
         {
             try

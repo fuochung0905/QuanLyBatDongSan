@@ -15,6 +15,7 @@ namespace REPONSITORY.HETHONG.VAITRO
         BaseResponse<List<MODELCombobox>> GetAllForCombobox();
         BaseResponse<List<MODELVaiTro_PhanQuyen>> GetListPhanQuyenVaiTro(GetListPhanQuyenVaiTroRequest request);
         BaseResponse<MODELVaiTro_PhanQuyen> PostPhanQuyenVaiTro(PostPhanQuyenVaiTroRequest request);
+    
     }
 }
     

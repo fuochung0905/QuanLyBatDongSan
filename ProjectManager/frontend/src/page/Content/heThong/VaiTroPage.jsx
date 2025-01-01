@@ -11,6 +11,7 @@ import api from "../../../api/apiService.js";
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import '../../../../public/css/vaitro.css'
 
+
 function VaiTroPage() {
   const [open, setOpen] = useState(false);
   const [openInsert, setOpenInsert] = useState(false);
@@ -24,11 +25,15 @@ function VaiTroPage() {
   const [openPermissionDialog, setOpenPermissionDialog] = useState(false);
   const [permissionData, setPermissionData] = useState(null);
 
-
   useEffect(() => {
     fetchData(pageIndex, pageSize);
   }, [pageIndex, pageSize]);
-
+  useEffect(() => {
+    if (permissionData) {
+      console.log('Updated Permission Data:', permissionData);
+    }
+  }, [permissionData]);
+  
   const fetchData = (pageIndex, pageSize, textSearch = "") => {
     api
       .post('/VaiTro/get-list-paging', { pageIndex, pageSize, textSearch })
@@ -47,17 +52,17 @@ function VaiTroPage() {
   };
 
 
-  const handlePermissionClick = (row) => {
-    api.post('/VaiTro/get-detail', { id: row.id })
-      .then((response) => {
-        setPermissionData(response.data); 
-        setOpenPermissionDialog(true);  
-      })
-      .catch((error) => {
-        toast.error('Không thể lấy thông tin vai trò!');
-        console.error(error);
-      });
+  const handlePermissionClick = async (row) => {
+    try {
+      const response = await api.get('/NhomQuyen/get-all');
+      setPermissionData({ permissionData: response.data, id: row.id });
+      setOpenPermissionDialog(true); 
+    } catch (error) {
+      toast.error('Không thể lấy thông tin vai trò!');
+      console.error(error);
+    }
   };
+  
   
   const handlePageChange = (newPage) => {
     setPageIndex(newPage);
@@ -66,7 +71,19 @@ function VaiTroPage() {
   const handlePageSizeChange = (newPageSize) => {
     setPageSize(newPageSize);
   };
-
+  const handleGetListPhanQuyenWithVaiTro = (nhomId, vaiTroIdWithNhomQuyen) => {
+    api
+      .post('/VaiTro/get-list-phan-quyen', { nhomId, vaiTroIdWithNhomQuyen })
+      .then((response) => {
+       console.log(response);
+      })
+      .catch((error) => {
+        toast.error('Không thể tải dữ liệu!');
+      });
+   
+  };
+  
+  
   const handleEditClick = (row) => {
     setRowData(row);
     setOpen(true);
@@ -288,6 +305,37 @@ function VaiTroPage() {
         pageSizeOptions={[3, 20, 30, 100]}
       />
 
+
+      <Dialog
+    open={openPermissionDialog}
+    onClose={() => setOpenPermissionDialog(false)}
+    fullWidth
+    maxWidth="md"
+  >
+    <DialogTitle>Quản lý quyền cho vai trò</DialogTitle>
+    <DialogContent>
+      {permissionData && permissionData.permissionData?.result?.length > 0 ? (
+        <div className="button-container">
+          {permissionData.permissionData.result.map((permission) => (
+            <button
+              key={permission.id}
+              className="permission-button"
+              onClick={() => handleGetListPhanQuyenWithVaiTro(permission.id, permissionData.id )}
+            >
+              {permission.tenGoi}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <p>Không có dữ liệu.</p>
+      )}
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={() => setOpenPermissionDialog(false)} color="secondary">
+        Đóng
+      </Button>
+    </DialogActions>
+      </Dialog>
 
 
       {/* <table>

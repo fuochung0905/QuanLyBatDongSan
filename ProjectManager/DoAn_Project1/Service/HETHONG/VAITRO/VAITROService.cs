@@ -237,7 +237,7 @@ namespace REPONSITORY.HETHONG.VAITRO
                 var parameters = new[]
                 {
                      new SqlParameter("@NhomId", request.NhomId),
-                     new SqlParameter("@VaiTroId", request.VaiTroId),
+                     new SqlParameter("@VaiTroId", request.VaiTroIdWithNhomQuyen),
                 };
 
                 response.Data = _unitOfWork.GetRepository<MODELVaiTro_PhanQuyen>().ExcuteStoredProcedure("sp_TaiKhoan_LayDanhSachPhanQuyen", parameters).ToList();
@@ -287,5 +287,8 @@ namespace REPONSITORY.HETHONG.VAITRO
 
             return response;
         }
+
+  
+
     }
 }

@@ -2,7 +2,7 @@
 {
     public class GetListPhanQuyenVaiTroRequest
     {
-        public Guid? VaiTroId { get; set; }
+        public Guid? VaiTroIdWithNhomQuyen { get; set; }
         public Guid? NhomId { get; set; }
     }
 }
